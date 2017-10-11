@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		0A02D11B1F8ED850003D5BFC /* GitHubPullRequestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02D11A1F8ED850003D5BFC /* GitHubPullRequestFile.swift */; };
 		0A2DF59A1F8ED1E3008B9F63 /* GitHubRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DF5991F8ED1E3008B9F63 /* GitHubRepo.swift */; };
+		0AB987AC1F8EE4B200910F04 /* ReposController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AB1F8EE4B200910F04 /* ReposController.swift */; };
 		0ABD03731F8ED2C600C6E37E /* GitHubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD03721F8ED2C600C6E37E /* GitHubClient.swift */; };
 		0AC9B57B1F8E8E60009D5B74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */; };
-		0AC9B57D1F8E8E60009D5B74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */; };
+		0AC9B57D1F8E8E60009D5B74 /* UsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9B57C1F8E8E60009D5B74 /* UsersController.swift */; };
 		0AC9B5801F8E8E60009D5B74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AC9B57E1F8E8E60009D5B74 /* Main.storyboard */; };
 		0AC9B5821F8E8E60009D5B74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AC9B5811F8E8E60009D5B74 /* Assets.xcassets */; };
 		0AC9B5851F8E8E60009D5B74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AC9B5831F8E8E60009D5B74 /* LaunchScreen.storyboard */; };
@@ -58,10 +59,11 @@
 /* Begin PBXFileReference section */
 		0A02D11A1F8ED850003D5BFC /* GitHubPullRequestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPullRequestFile.swift; sourceTree = "<group>"; };
 		0A2DF5991F8ED1E3008B9F63 /* GitHubRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepo.swift; sourceTree = "<group>"; };
+		0AB987AB1F8EE4B200910F04 /* ReposController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposController.swift; sourceTree = "<group>"; };
 		0ABD03721F8ED2C600C6E37E /* GitHubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClient.swift; sourceTree = "<group>"; };
 		0AC9B5771F8E8E60009D5B74 /* CodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0AC9B57C1F8E8E60009D5B74 /* UsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersController.swift; sourceTree = "<group>"; };
 		0AC9B57F1F8E8E60009D5B74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AC9B5811F8E8E60009D5B74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AC9B5841F8E8E60009D5B74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -194,7 +196,8 @@
 		0AC9B5A21F8E9332009D5B74 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */,
+				0AC9B57C1F8E8E60009D5B74 /* UsersController.swift */,
+				0AB987AB1F8EE4B200910F04 /* ReposController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -365,7 +368,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AC9B57D1F8E8E60009D5B74 /* ViewController.swift in Sources */,
+				0AB987AC1F8EE4B200910F04 /* ReposController.swift in Sources */,
+				0AC9B57D1F8E8E60009D5B74 /* UsersController.swift in Sources */,
 				0AC9B57B1F8E8E60009D5B74 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

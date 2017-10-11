@@ -99,7 +99,10 @@
 			isa = PBXGroup;
 			children = (
 				0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */,
-				0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */,
+				0AC9B5A11F8E9329009D5B74 /* Models */,
+				0AC9B5A41F8E9346009D5B74 /* Views */,
+				0AC9B5A21F8E9332009D5B74 /* Controllers */,
+				0AC9B5A01F8E931C009D5B74 /* Extensions */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -128,6 +131,35 @@
 				0AC9B59F1F8E9027009D5B74 /* GitHub.playground */,
 			);
 			path = GitHubPlaygrounds;
+			sourceTree = "<group>";
+		};
+		0AC9B5A01F8E931C009D5B74 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0AC9B5A11F8E9329009D5B74 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0AC9B5A21F8E9332009D5B74 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0AC9B5A41F8E9346009D5B74 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

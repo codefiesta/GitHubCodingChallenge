@@ -26,14 +26,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0AC9B5771F8E8E60009D5B74 /* GitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AC9B5771F8E8E60009D5B74 /* CodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0AC9B57F1F8E8E60009D5B74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AC9B5811F8E8E60009D5B74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AC9B5841F8E8E60009D5B74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AC9B5861F8E8E60009D5B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0AC9B58B1F8E8E60009D5B74 /* GitHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AC9B58B1F8E8E60009D5B74 /* CodingChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodingChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC9B58F1F8E8E60009D5B74 /* GitHubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubTests.swift; sourceTree = "<group>"; };
 		0AC9B5911F8E8E60009D5B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AC9B59F1F8E9027009D5B74 /* GitHub.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GitHub.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -60,9 +60,9 @@
 		0AC9B56E1F8E8E60009D5B74 = {
 			isa = PBXGroup;
 			children = (
-				0AC9B5791F8E8E60009D5B74 /* GitHub */,
-				0AC9B58E1F8E8E60009D5B74 /* GitHubTests */,
-				0AC9B59E1F8E8FD5009D5B74 /* GitHubPlaygrounds */,
+				0AC9B5791F8E8E60009D5B74 /* CodingChallenge */,
+				0AC9B58E1F8E8E60009D5B74 /* CodingChallengeTests */,
+				0AC9B59E1F8E8FD5009D5B74 /* CodingChallengePlaygrounds */,
 				0AC9B5781F8E8E60009D5B74 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,39 +70,36 @@
 		0AC9B5781F8E8E60009D5B74 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0AC9B5771F8E8E60009D5B74 /* GitHub.app */,
-				0AC9B58B1F8E8E60009D5B74 /* GitHubTests.xctest */,
+				0AC9B5771F8E8E60009D5B74 /* CodingChallenge.app */,
+				0AC9B58B1F8E8E60009D5B74 /* CodingChallengeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0AC9B5791F8E8E60009D5B74 /* GitHub */ = {
+		0AC9B5791F8E8E60009D5B74 /* CodingChallenge */ = {
 			isa = PBXGroup;
 			children = (
 				0AC9B59A1F8E8E88009D5B74 /* Classes */,
 				0AC9B59B1F8E8E90009D5B74 /* Storyboards */,
 				0AC9B59C1F8E8EA0009D5B74 /* Resources */,
 			);
-			path = GitHub;
+			path = CodingChallenge;
 			sourceTree = "<group>";
 		};
-		0AC9B58E1F8E8E60009D5B74 /* GitHubTests */ = {
+		0AC9B58E1F8E8E60009D5B74 /* CodingChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
 				0AC9B58F1F8E8E60009D5B74 /* GitHubTests.swift */,
 				0AC9B5911F8E8E60009D5B74 /* Info.plist */,
 			);
-			path = GitHubTests;
+			path = CodingChallengeTests;
 			sourceTree = "<group>";
 		};
 		0AC9B59A1F8E8E88009D5B74 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */,
-				0AC9B5A11F8E9329009D5B74 /* Models */,
-				0AC9B5A41F8E9346009D5B74 /* Views */,
 				0AC9B5A21F8E9332009D5B74 /* Controllers */,
-				0AC9B5A01F8E931C009D5B74 /* Extensions */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -125,26 +122,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		0AC9B59E1F8E8FD5009D5B74 /* GitHubPlaygrounds */ = {
+		0AC9B59E1F8E8FD5009D5B74 /* CodingChallengePlaygrounds */ = {
 			isa = PBXGroup;
 			children = (
 				0AC9B59F1F8E9027009D5B74 /* GitHub.playground */,
 			);
-			path = GitHubPlaygrounds;
-			sourceTree = "<group>";
-		};
-		0AC9B5A01F8E931C009D5B74 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		0AC9B5A11F8E9329009D5B74 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
+			path = CodingChallengePlaygrounds;
 			sourceTree = "<group>";
 		};
 		0AC9B5A21F8E9332009D5B74 /* Controllers */ = {
@@ -155,19 +138,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		0AC9B5A41F8E9346009D5B74 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0AC9B5761F8E8E60009D5B74 /* GitHub */ = {
+		0AC9B5761F8E8E60009D5B74 /* CodingChallenge */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0AC9B5941F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "GitHub" */;
+			buildConfigurationList = 0AC9B5941F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "CodingChallenge" */;
 			buildPhases = (
 				0AC9B5731F8E8E60009D5B74 /* Sources */,
 				0AC9B5741F8E8E60009D5B74 /* Frameworks */,
@@ -177,14 +153,14 @@
 			);
 			dependencies = (
 			);
-			name = GitHub;
+			name = CodingChallenge;
 			productName = GitHub;
-			productReference = 0AC9B5771F8E8E60009D5B74 /* GitHub.app */;
+			productReference = 0AC9B5771F8E8E60009D5B74 /* CodingChallenge.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0AC9B58A1F8E8E60009D5B74 /* GitHubTests */ = {
+		0AC9B58A1F8E8E60009D5B74 /* CodingChallengeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0AC9B5971F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "GitHubTests" */;
+			buildConfigurationList = 0AC9B5971F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "CodingChallengeTests" */;
 			buildPhases = (
 				0AC9B5871F8E8E60009D5B74 /* Sources */,
 				0AC9B5881F8E8E60009D5B74 /* Frameworks */,
@@ -195,9 +171,9 @@
 			dependencies = (
 				0AC9B58D1F8E8E60009D5B74 /* PBXTargetDependency */,
 			);
-			name = GitHubTests;
+			name = CodingChallengeTests;
 			productName = GitHubTests;
-			productReference = 0AC9B58B1F8E8E60009D5B74 /* GitHubTests.xctest */;
+			productReference = 0AC9B58B1F8E8E60009D5B74 /* CodingChallengeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -221,7 +197,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0AC9B5721F8E8E60009D5B74 /* Build configuration list for PBXProject "GitHub" */;
+			buildConfigurationList = 0AC9B5721F8E8E60009D5B74 /* Build configuration list for PBXProject "CodingChallenge" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -234,8 +210,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0AC9B5761F8E8E60009D5B74 /* GitHub */,
-				0AC9B58A1F8E8E60009D5B74 /* GitHubTests */,
+				0AC9B5761F8E8E60009D5B74 /* CodingChallenge */,
+				0AC9B58A1F8E8E60009D5B74 /* CodingChallengeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -283,7 +259,7 @@
 /* Begin PBXTargetDependency section */
 		0AC9B58D1F8E8E60009D5B74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0AC9B5761F8E8E60009D5B74 /* GitHub */;
+			target = 0AC9B5761F8E8E60009D5B74 /* CodingChallenge */;
 			targetProxy = 0AC9B58C1F8E8E60009D5B74 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -458,7 +434,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitHub.app/GitHub";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodingChallenge.app/CodingChallenge";
 			};
 			name = Debug;
 		};
@@ -475,14 +451,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitHub.app/GitHub";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CodingChallenge.app/CodingChallenge";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0AC9B5721F8E8E60009D5B74 /* Build configuration list for PBXProject "GitHub" */ = {
+		0AC9B5721F8E8E60009D5B74 /* Build configuration list for PBXProject "CodingChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0AC9B5921F8E8E60009D5B74 /* Debug */,
@@ -491,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0AC9B5941F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "GitHub" */ = {
+		0AC9B5941F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "CodingChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0AC9B5951F8E8E60009D5B74 /* Debug */,
@@ -500,7 +476,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0AC9B5971F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "GitHubTests" */ = {
+		0AC9B5971F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "CodingChallengeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0AC9B5981F8E8E60009D5B74 /* Debug */,

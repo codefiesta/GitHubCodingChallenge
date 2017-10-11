@@ -77,12 +77,9 @@
 		0AC9B5791F8E8E60009D5B74 /* GitHub */ = {
 			isa = PBXGroup;
 			children = (
-				0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */,
-				0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */,
-				0AC9B57E1F8E8E60009D5B74 /* Main.storyboard */,
-				0AC9B5811F8E8E60009D5B74 /* Assets.xcassets */,
-				0AC9B5831F8E8E60009D5B74 /* LaunchScreen.storyboard */,
-				0AC9B5861F8E8E60009D5B74 /* Info.plist */,
+				0AC9B59A1F8E8E88009D5B74 /* Classes */,
+				0AC9B59B1F8E8E90009D5B74 /* Storyboards */,
+				0AC9B59C1F8E8EA0009D5B74 /* Resources */,
 			);
 			path = GitHub;
 			sourceTree = "<group>";
@@ -94,6 +91,33 @@
 				0AC9B5911F8E8E60009D5B74 /* Info.plist */,
 			);
 			path = GitHubTests;
+			sourceTree = "<group>";
+		};
+		0AC9B59A1F8E8E88009D5B74 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */,
+				0AC9B57C1F8E8E60009D5B74 /* ViewController.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		0AC9B59B1F8E8E90009D5B74 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B57E1F8E8E60009D5B74 /* Main.storyboard */,
+				0AC9B5831F8E8E60009D5B74 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		0AC9B59C1F8E8EA0009D5B74 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B5811F8E8E60009D5B74 /* Assets.xcassets */,
+				0AC9B5861F8E8E60009D5B74 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,7 +379,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				INFOPLIST_FILE = GitHub/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GitHub/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.procore.GitHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -370,7 +394,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				INFOPLIST_FILE = GitHub/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GitHub/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.procore.GitHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";

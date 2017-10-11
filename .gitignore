@@ -1,0 +1,11 @@
+# Mac OS X
+*.DS_Store
+*.swp
+
+# Xcode
+Pods
+*.xcuserstate
+*.xctimeline
+GitHub.xcworkspace/
+xcuserdata
+

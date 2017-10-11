@@ -36,6 +36,7 @@
 		0AC9B58B1F8E8E60009D5B74 /* GitHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC9B58F1F8E8E60009D5B74 /* GitHubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubTests.swift; sourceTree = "<group>"; };
 		0AC9B5911F8E8E60009D5B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AC9B59F1F8E9027009D5B74 /* GitHub.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GitHub.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 			children = (
 				0AC9B5791F8E8E60009D5B74 /* GitHub */,
 				0AC9B58E1F8E8E60009D5B74 /* GitHubTests */,
+				0AC9B59E1F8E8FD5009D5B74 /* GitHubPlaygrounds */,
 				0AC9B5781F8E8E60009D5B74 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,6 +120,14 @@
 				0AC9B5861F8E8E60009D5B74 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0AC9B59E1F8E8FD5009D5B74 /* GitHubPlaygrounds */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B59F1F8E9027009D5B74 /* GitHub.playground */,
+			);
+			path = GitHubPlaygrounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

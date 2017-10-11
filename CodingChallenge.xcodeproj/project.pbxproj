@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A02D11B1F8ED850003D5BFC /* GitHubPullRequestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02D11A1F8ED850003D5BFC /* GitHubPullRequestFile.swift */; };
 		0A2DF59A1F8ED1E3008B9F63 /* GitHubRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DF5991F8ED1E3008B9F63 /* GitHubRepo.swift */; };
 		0ABD03731F8ED2C600C6E37E /* GitHubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD03721F8ED2C600C6E37E /* GitHubClient.swift */; };
 		0AC9B57B1F8E8E60009D5B74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */; };
@@ -20,7 +21,7 @@
 		0AC9F0B11F8ECECE00287506 /* GitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC9F0A91F8ECECE00287506 /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC9F0B91F8ECF1D00287506 /* GitHubSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9F0B81F8ECF1D00287506 /* GitHubSearchResults.swift */; };
 		0AC9F0BB1F8ECF3700287506 /* GitHubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9F0BA1F8ECF3700287506 /* GitHubUser.swift */; };
-		0AD6006C1F8ED23100A0B529 /* GitHubPR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6006B1F8ED23100A0B529 /* GitHubPR.swift */; };
+		0AD6006C1F8ED23100A0B529 /* GitHubPullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6006B1F8ED23100A0B529 /* GitHubPullRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A02D11A1F8ED850003D5BFC /* GitHubPullRequestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPullRequestFile.swift; sourceTree = "<group>"; };
 		0A2DF5991F8ED1E3008B9F63 /* GitHubRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepo.swift; sourceTree = "<group>"; };
 		0ABD03721F8ED2C600C6E37E /* GitHubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClient.swift; sourceTree = "<group>"; };
 		0AC9B5771F8E8E60009D5B74 /* CodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +75,7 @@
 		0AC9F0AC1F8ECECE00287506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AC9F0B81F8ECF1D00287506 /* GitHubSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResults.swift; sourceTree = "<group>"; };
 		0AC9F0BA1F8ECF3700287506 /* GitHubUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUser.swift; sourceTree = "<group>"; };
-		0AD6006B1F8ED23100A0B529 /* GitHubPR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPR.swift; sourceTree = "<group>"; };
+		0AD6006B1F8ED23100A0B529 /* GitHubPullRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPullRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +110,8 @@
 				0AC9F0B81F8ECF1D00287506 /* GitHubSearchResults.swift */,
 				0AC9F0BA1F8ECF3700287506 /* GitHubUser.swift */,
 				0A2DF5991F8ED1E3008B9F63 /* GitHubRepo.swift */,
-				0AD6006B1F8ED23100A0B529 /* GitHubPR.swift */,
+				0AD6006B1F8ED23100A0B529 /* GitHubPullRequest.swift */,
+				0A02D11A1F8ED850003D5BFC /* GitHubPullRequestFile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -382,8 +385,9 @@
 				0ABD03731F8ED2C600C6E37E /* GitHubClient.swift in Sources */,
 				0AC9F0B91F8ECF1D00287506 /* GitHubSearchResults.swift in Sources */,
 				0A2DF59A1F8ED1E3008B9F63 /* GitHubRepo.swift in Sources */,
-				0AD6006C1F8ED23100A0B529 /* GitHubPR.swift in Sources */,
+				0AD6006C1F8ED23100A0B529 /* GitHubPullRequest.swift in Sources */,
 				0AC9F0BB1F8ECF3700287506 /* GitHubUser.swift in Sources */,
+				0A02D11B1F8ED850003D5BFC /* GitHubPullRequestFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  GitHubPR.swift
+//  GitHubPullRequest.swift
 //  GitHub
 //
 //  Created by Kevin McKee on 10/11/17.
@@ -8,18 +8,26 @@
 
 import Foundation
 
-// Represents a PR
-public struct GitHubPR: Codable {
+// Represents a Pull Request
+public struct GitHubPullRequest: Codable {
     
     public var number: Int
     public var title: String
     public var state: String
+    public var url: String
     public var diffUrl: String
+    
+    public var filesUrl: String {
+        get {
+            return "\(url)/files"
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case number
         case title
         case state
+        case url
         case diffUrl = "diff_url"
     }
 }

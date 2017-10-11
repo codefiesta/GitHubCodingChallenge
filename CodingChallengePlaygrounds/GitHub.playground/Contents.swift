@@ -6,7 +6,6 @@ import GitHub
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-
 func run() {
 
     // Find the users and chain the requests
@@ -33,12 +32,8 @@ func repos(_ user: GitHubUser?) {
             PlaygroundPage.current.finishExecution()
         }
         
-        for (index, repo) in repos.enumerated() {
+        for repo in repos {
             pulls(repo)
-            if index == repos.count {
-                // All done, fininsh the execution
-                PlaygroundPage.current.finishExecution()
-            }
         }
     }
 }
@@ -55,12 +50,29 @@ func pulls(_ repo: GitHubRepo?) {
             PlaygroundPage.current.finishExecution()
         }
         
-        for result in results {
-            print("🔂 [\(result.number)] \(result.title) => \(result.diffUrl)")
+        for (index, pr) in results.enumerated() {
+            print("🔂 [\(pr.number)] \(pr.title) => \(pr.diffUrl)")
+            files(pr)
+
+            if index == results.count {
+                // All done, fininsh the execution
+                PlaygroundPage.current.finishExecution()
+            }
         }
     }
 }
 
+func files(_ pr: GitHubPullRequest?) {
+    GitHubClient.files(pr) { (files, error) in
+        guard let files = files else {
+            PlaygroundPage.current.finishExecution()
+        }
+        
+        for file in files {
+            print("📁 [\(file.name)] +\(file.additions) -\(file.deletions) \(file.changes)")
+        }
+    }
+}
 
 run()
 

@@ -2,72 +2,9 @@
   
 import UIKit
 import PlaygroundSupport
+import GitHub
 
 PlaygroundPage.current.needsIndefiniteExecution = true
-
-struct GitHubSearchResults: Codable {
-    
-    var totalCount: Int
-    var users: [GitHubUser]
-    
-    enum CodingKeys: String, CodingKey {
-        case totalCount = "total_count"
-        case users = "items"
-    }
-}
-
-// Represents a User or Organization
-struct GitHubUser: Codable {
-
-    var login: String
-    var avatarUrl: String
-    var reposUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case login
-        case avatarUrl = "avatar_url"
-        case reposUrl = "repos_url"
-    }
-}
-
-// Represents a Reop
-struct GitHubRepo: Codable {
-
-    var name: String
-    var description: String
-    var pullsUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case description
-        case pullsUrl = "pulls_url"
-    }
-
-    // Use a custom decoder to cleanup the pulls url
-    // This is done since we can't use the didSet {} observer since it won't fire inside an init() 😢
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        name = try values.decode(String.self, forKey: .name)
-        description = try values.decode(String.self, forKey: .description)
-        pullsUrl = try values.decode(String.self, forKey: .pullsUrl).replacingOccurrences(of: "{/number}", with: "")
-    }
-}
-
-// Represents a PR
-struct GitHubPR: Codable {
-    
-    var number: Int
-    var title: String
-    var state: String
-    var diffUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case number
-        case title
-        case state
-        case diffUrl = "diff_url"
-    }
-}
 
 func users() {
 

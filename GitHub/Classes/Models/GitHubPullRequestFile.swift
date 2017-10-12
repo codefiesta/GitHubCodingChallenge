@@ -19,6 +19,11 @@ public struct GitHubPullRequestFile: Codable {
     public var contentsUrl: String
     public var patch: String
     
+    public lazy var lines: [String] = {
+        // Breaks the whole patch up line by lines
+        return patch.components(separatedBy: .newlines)
+    }()
+    
     enum CodingKeys: String, CodingKey {
         case name = "filename"
         case status

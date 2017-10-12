@@ -75,8 +75,15 @@ class FileCell: UITableViewCell {
     }
     
     func prepare(_ file: GitHubPullRequestFile) {
-        prepareLine(file.patch, stackView: leftView)
-        prepareLine(file.patch, stackView: rightView)
+        
+        var file = file
+        for line in file.leftLines {
+            prepareLine(line, stackView: leftView)
+        }
+        
+        for line in file.rightLines {
+            prepareLine(line, stackView: rightView)
+        }
     }
 }
 
@@ -84,11 +91,28 @@ extension FileCell {
     
     fileprivate func prepareLine(_ line: String?, stackView: UIStackView) {
 
+        guard let line = line else {
+            return
+        }
+        
         let label = UILabel()
         label.numberOfLines = 0
         label.text = line
         label.font = UIFont.systemFont(ofSize: 8)
+
+        var bgColor: UIColor = .white
         
+        if line.starts(with: "@@ ") {
+            bgColor = UIColor.blue.withAlphaComponent(0.05)
+        }
+        if line.starts(with: "+") {
+            bgColor = UIColor.green.withAlphaComponent(0.2)
+        }
+        if line.starts(with: "-") {
+            bgColor = UIColor.red.withAlphaComponent(0.2)
+        }
+        label.backgroundColor = bgColor
+
         stackView.addArrangedSubview(label)
     }
 }

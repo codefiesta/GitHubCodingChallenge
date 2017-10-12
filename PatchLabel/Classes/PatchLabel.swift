@@ -17,10 +17,10 @@ open class PatchLabel: UILabel {
     fileprivate static let additionLinePattern = "\n(\\+.*)"
 
     fileprivate let attributions: [String: Any] = [
-            firstLinePattern: UIColor.blue.withAlphaComponent(0.05),
-            deletionLinePattern: UIColor.red.withAlphaComponent(0.05),
-            additionLinePattern: UIColor.green.withAlphaComponent(0.05)
-         ]
+        firstLinePattern: UIColor.blue.withAlphaComponent(0.05),
+        deletionLinePattern: UIColor.red.withAlphaComponent(0.05),
+        additionLinePattern: UIColor.green.withAlphaComponent(0.05)
+    ]
 
     open var addition: Bool = true {
         didSet {

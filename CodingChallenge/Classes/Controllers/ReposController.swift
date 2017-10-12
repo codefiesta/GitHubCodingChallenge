@@ -20,6 +20,7 @@ class ReposController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareTableView()
         prepareData()
     }
     
@@ -35,6 +36,12 @@ class ReposController: UITableViewController {
         }
     }
 
+    fileprivate func prepareTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.tableFooterView = UIView()
+    }
+
     fileprivate func prepareData() {
         
         guard let user = user else {
@@ -48,6 +55,10 @@ class ReposController: UITableViewController {
             self.repos = repos
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
+            
+            if repos.isEmpty {
+                self.handleNoRepos()
             }
         }
     }
@@ -68,16 +79,16 @@ class ReposController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        
-        guard !repos.isEmpty else {
-            return cell
+        guard !repos.isEmpty, let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RepoTableViewCell else {
+            return UITableViewCell()
         }
         
         let repo = repos[indexPath.row]
-        cell.textLabel?.text = repo.name
-        cell.detailTextLabel?.text = repo.description
-
+        cell.nameLabel?.text = repo.name
+        cell.descLabel?.text = repo.description
+        cell.languageLabel?.text = repo.language
+        cell.starGazersLabel?.text = "⭐️ \(repo.starGazers)"
+        cell.forksLabel?.text = "⑂ \(repo.forks)"
         return cell
     }
     
@@ -85,4 +96,23 @@ class ReposController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
+extension ReposController {
+    
+    fileprivate func handleNoRepos() {
+        
+        let message = "\(user?.login ?? "This user") has no repositories to view."
+        
+        let alert = UIAlertController(title: "No Repos", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            (alert: UIAlertAction) -> Void in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+}
+
 

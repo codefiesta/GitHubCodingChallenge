@@ -20,6 +20,7 @@ class PullsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareTableView()
         prepareData()
     }
     
@@ -33,6 +34,12 @@ class PullsController: UITableViewController {
             let selectedIndexPath = tableView.indexPathForSelectedRow {
             controller.pullRequest = pulls[selectedIndexPath.row]
         }
+    }
+
+    fileprivate func prepareTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.tableFooterView = UIView()
     }
 
     fileprivate func prepareData() {
@@ -49,6 +56,11 @@ class PullsController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+            
+            if pulls.isEmpty {
+                self.handleNoPulls()
+            }
+            
         }
     }
     
@@ -76,13 +88,31 @@ class PullsController: UITableViewController {
         
         let pr = pulls[indexPath.row]
         cell.textLabel?.text = pr.title
-        cell.detailTextLabel?.text = pr.diffUrl
+        cell.detailTextLabel?.text = "#\(pr.number) Opened \(pr.createDate.toRelativeDateFormat())"
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension PullsController {
+    
+    fileprivate func handleNoPulls() {
+        
+        let message = "\(repo?.name ?? "This repo") has no open pull requests."
+        
+        let alert = UIAlertController(title: "No Open PRs", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            (alert: UIAlertAction) -> Void in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        
+        present(alert, animated: true, completion: nil)
+
     }
 }
 

@@ -21,7 +21,8 @@ class UsersController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepare()
+        prepareSearchBar()
+        prepareTableView()
         prepareData()
     }
 
@@ -37,10 +38,16 @@ class UsersController: UITableViewController {
         }
     }
     
-    fileprivate func prepare() {
+    fileprivate func prepareSearchBar() {
         searchBar?.text = "Magicalpanda"
     }
     
+    fileprivate func prepareTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 70
+        tableView.tableFooterView = UIView()
+    }
+
     fileprivate func prepareData() {
         
         guard let query = searchBar?.text else {
@@ -74,15 +81,15 @@ class UsersController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        
-        guard let results = results else {
-            return cell
+        guard let results = results, let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BasicTableViewCell else {
+            return UITableViewCell()
         }
         
         let user = results.users[indexPath.row]
-        cell.textLabel?.text = user.login
-        cell.detailTextLabel?.text = user.reposUrl
+        
+        cell.primaryImageView?.image(fromUrl: user.avatarUrl, nil)
+        cell.titleLabel?.text = user.login
+        cell.descLabel?.text = user.reposUrl
         return cell
     }
     

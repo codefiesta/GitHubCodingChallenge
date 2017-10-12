@@ -13,10 +13,12 @@
 		0A4A7D2A1F8F221500E1E09B /* PatchLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4A7D231F8F221500E1E09B /* PatchLabel.framework */; };
 		0A4A7D2B1F8F221500E1E09B /* PatchLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4A7D231F8F221500E1E09B /* PatchLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A4A7D311F8F223D00E1E09B /* PatchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A7D301F8F223D00E1E09B /* PatchLabel.swift */; };
+		0A4D40251F8FE08C00BC5EDF /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D40241F8FE08C00BC5EDF /* BasicTableViewCell.swift */; };
+		0A4D40271F8FE5DE00BC5EDF /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */; };
 		0AB987AC1F8EE4B200910F04 /* ReposController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AB1F8EE4B200910F04 /* ReposController.swift */; };
 		0AB987AE1F8EE80000910F04 /* PullsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AD1F8EE80000910F04 /* PullsController.swift */; };
 		0AB987B01F8EEA8600910F04 /* DiffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AF1F8EEA8600910F04 /* DiffController.swift */; };
-		0AB987B31F8EEF2E00910F04 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987B21F8EEF2E00910F04 /* FileCell.swift */; };
+		0AB987B31F8EEF2E00910F04 /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987B21F8EEF2E00910F04 /* FileTableViewCell.swift */; };
 		0AB987B61F8EF2C700910F04 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987B51F8EF2C700910F04 /* Extensions.swift */; };
 		0ABD03731F8ED2C600C6E37E /* GitHubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD03721F8ED2C600C6E37E /* GitHubClient.swift */; };
 		0AC9B57B1F8E8E60009D5B74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9B57A1F8E8E60009D5B74 /* AppDelegate.swift */; };
@@ -79,10 +81,12 @@
 		0A4A7D251F8F221500E1E09B /* PatchLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatchLabel.h; sourceTree = "<group>"; };
 		0A4A7D261F8F221500E1E09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4A7D301F8F223D00E1E09B /* PatchLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchLabel.swift; sourceTree = "<group>"; };
+		0A4D40241F8FE08C00BC5EDF /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		0AB987AB1F8EE4B200910F04 /* ReposController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposController.swift; sourceTree = "<group>"; };
 		0AB987AD1F8EE80000910F04 /* PullsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullsController.swift; sourceTree = "<group>"; };
 		0AB987AF1F8EEA8600910F04 /* DiffController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffController.swift; sourceTree = "<group>"; };
-		0AB987B21F8EEF2E00910F04 /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
+		0AB987B21F8EEF2E00910F04 /* FileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		0AB987B51F8EF2C700910F04 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0ABD03721F8ED2C600C6E37E /* GitHubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClient.swift; sourceTree = "<group>"; };
 		0AC9B5771F8E8E60009D5B74 /* CodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,7 +163,9 @@
 		0AB987B11F8EEF0E00910F04 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0AB987B21F8EEF2E00910F04 /* FileCell.swift */,
+				0A4D40241F8FE08C00BC5EDF /* BasicTableViewCell.swift */,
+				0AB987B21F8EEF2E00910F04 /* FileTableViewCell.swift */,
+				0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -491,7 +497,9 @@
 				0AB987AE1F8EE80000910F04 /* PullsController.swift in Sources */,
 				0AB987AC1F8EE4B200910F04 /* ReposController.swift in Sources */,
 				0AC9B57D1F8E8E60009D5B74 /* UsersController.swift in Sources */,
-				0AB987B31F8EEF2E00910F04 /* FileCell.swift in Sources */,
+				0AB987B31F8EEF2E00910F04 /* FileTableViewCell.swift in Sources */,
+				0A4D40251F8FE08C00BC5EDF /* BasicTableViewCell.swift in Sources */,
+				0A4D40271F8FE5DE00BC5EDF /* RepoTableViewCell.swift in Sources */,
 				0AC9B57B1F8E8E60009D5B74 /* AppDelegate.swift in Sources */,
 				0AB987B01F8EEA8600910F04 /* DiffController.swift in Sources */,
 				0AB987B61F8EF2C700910F04 /* Extensions.swift in Sources */,

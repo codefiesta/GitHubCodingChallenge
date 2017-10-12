@@ -14,6 +14,7 @@ public struct GitHubPullRequest: Codable {
     public var number: Int
     public var title: String
     public var state: String
+    public var createDate: Date
     public var url: String
     public var diffUrl: String
     
@@ -27,6 +28,7 @@ public struct GitHubPullRequest: Codable {
         case number
         case title
         case state
+        case createDate = "created_at"
         case url
         case diffUrl = "diff_url"
     }

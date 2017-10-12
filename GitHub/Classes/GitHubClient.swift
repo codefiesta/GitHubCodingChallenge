@@ -35,7 +35,8 @@ public struct GitHubClient {
             return completion(nil, nil)
         }
 
-        request(user.reposUrl) { (result: [GitHubRepo]?, error) in
+        let params: [String: String] = ["sort": "pushed"]
+        request(user.reposUrl, params: params) { (result: [GitHubRepo]?, error) in
             return completion(result, error)
         }
     }
@@ -49,7 +50,8 @@ public struct GitHubClient {
             return completion(nil, nil)
         }
 
-        request(repo.pullsUrl) { (results: [GitHubPullRequest]?, error) in
+        let params: [String: String] = ["direction": "desc"]
+        request(repo.pullsUrl, params: params) { (results: [GitHubPullRequest]?, error) in
             return completion(results, error)
         }
     }
@@ -110,6 +112,7 @@ extension GitHubClient {
             
             do {
                 let jsonDecoder = JSONDecoder()
+                jsonDecoder.dateDecodingStrategy = .iso8601 // For date parsing
                 let decoded: T = try jsonDecoder.decode(T.self, from: data)
                 return completion(decoded, error)
                 

@@ -1,5 +1,5 @@
 //
-//  FileCell.swift
+//  FileTableViewCell.swift
 //  CodingChallenge
 //
 //  Created by Kevin McKee on 10/11/17.
@@ -10,7 +10,7 @@ import UIKit
 import GitHub
 import PatchLabel
 
-class FileCell: UITableViewCell {
+class FileTableViewCell: UITableViewCell {
     
     var maxChanges: Int = 500 // The max number of changes allowed when rendering the diff
     var splitView: UIStackView! // The horizontal split stackview
@@ -111,7 +111,7 @@ class FileCell: UITableViewCell {
     }
 }
 
-extension FileCell {
+extension FileTableViewCell {
     
     fileprivate func preparePatch(_ patch: String?, stackView: UIStackView) {
 

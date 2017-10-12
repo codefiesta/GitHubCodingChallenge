@@ -28,7 +28,7 @@ class DiffController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         tableView.tableFooterView = UIView()
-        tableView.register(FileCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(FileTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
     
     fileprivate func prepareData() {
@@ -70,7 +70,7 @@ class DiffController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FileCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FileTableViewCell,
             !files.isEmpty else {
             return UITableViewCell()
         }

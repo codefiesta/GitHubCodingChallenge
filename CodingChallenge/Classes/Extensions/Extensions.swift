@@ -23,5 +23,62 @@ extension UIView {
         NSLayoutConstraint(item: parent, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
         
     }
+}
 
+extension Date {
+    
+    // Formats the date with the specified format
+    func toString(withFormat format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let dateString = dateFormatter.string(from: self)
+        return dateString
+    }
+
+    func toRelativeDateFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.doesRelativeDateFormatting = true
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        let dateString = dateFormatter.string(from: self)
+        return dateString
+    }
+}
+
+extension UIImageView {
+    
+    func image(fromUrl urlString: String?, _ completion: ((UIImage?, Error?) -> Void)? = nil) {
+        guard let urlString = urlString, let url = URL(string: urlString) else {
+            return
+        }
+        
+        var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 8.0)
+        request.httpMethod = "GET"
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+            
+            guard error == nil else {
+                completion?(nil, error)
+                return
+            }
+            
+            guard let data = data else {
+                completion?(nil, error)
+                return
+            }
+
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                self.image = image
+                completion?(image, nil)
+                return
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
 }

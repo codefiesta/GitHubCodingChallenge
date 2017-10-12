@@ -95,16 +95,19 @@ func patchFile() -> String? {
     return nil
 }
 
+let firstLinePattern = "^(.+)\n"
+let deletionLinePattern = "\n\\-(.*)?\n"
+let additionLinePattern = "\n\\+(.*)?\n"
+
 func testPatchRegex() {
     
     guard let text = patchFile() else {
         return
     }
     print(text)
-    let firstLinePattern = "^(.+)\n"
     
     do {
-        let regex = try NSRegularExpression(pattern: firstLinePattern, options: .caseInsensitive)
+        let regex = try NSRegularExpression(pattern: deletionLinePattern, options: .caseInsensitive)
         let matches = regex.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.utf16.count))
         if !matches.isEmpty {
             for match in matches {

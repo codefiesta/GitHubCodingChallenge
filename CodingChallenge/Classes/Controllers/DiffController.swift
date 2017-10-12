@@ -1,5 +1,5 @@
 //
-//  ReposController.swift
+//  DiffController.swift
 //  CodingChallenge
 //
 //  Created by Kevin McKee on 10/11/17.
@@ -8,11 +8,11 @@
 
 import GitHub
 
-class ReposController: UITableViewController {
+class DiffController: UITableViewController {
     
     let cellIdentifier = "Cell"
-    var user: GitHubUser?
-    var repos = [GitHubRepo]()
+    var pullRequest: GitHubPullRequest?
+    var files = [GitHubPullRequestFile]()
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -20,32 +20,25 @@ class ReposController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.tableFooterView = UIView()
+        view.layoutIfNeeded()
         prepareData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard !repos.isEmpty else {
-            return
-        }
-        
-        if let controller = segue.destination as? PullsController,
-            let selectedIndexPath = tableView.indexPathForSelectedRow {
-            controller.repo = repos[selectedIndexPath.row]
-        }
-    }
-
     fileprivate func prepareData() {
         
-        guard let user = user else {
+        guard let pullRequest = pullRequest else {
             return
         }
         
-        GitHubClient.repos(user) { (repos, error) in
-            guard let repos = repos else {
+        GitHubClient.files(pullRequest) { (files, error) in
+            guard let files = files else {
                 return
             }
-            self.repos = repos
+            self.files = files
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -54,30 +47,33 @@ class ReposController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        guard !repos.isEmpty else {
+        guard !files.isEmpty else {
+            return 0
+        }
+        return files.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let file = files[section]
+        return "\(file.name) +\(file.additions) -\(file.deletions)"
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard !files.isEmpty else {
             return 0
         }
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard !repos.isEmpty else {
-            return 0
-        }
-        return repos.count
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
-        guard !repos.isEmpty else {
+        guard !files.isEmpty else {
             return cell
         }
         
-        let repo = repos[indexPath.row]
-        cell.textLabel?.text = repo.name
-        cell.detailTextLabel?.text = repo.description
-
+        let file = files[indexPath.section]
+        cell.textLabel?.text = file.patch
         return cell
     }
     
@@ -85,4 +81,3 @@ class ReposController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-

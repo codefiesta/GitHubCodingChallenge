@@ -1,5 +1,5 @@
 //
-//  ReposController.swift
+//  PullsController.swift
 //  CodingChallenge
 //
 //  Created by Kevin McKee on 10/11/17.
@@ -8,11 +8,11 @@
 
 import GitHub
 
-class ReposController: UITableViewController {
+class PullsController: UITableViewController {
     
     let cellIdentifier = "Cell"
-    var user: GitHubUser?
-    var repos = [GitHubRepo]()
+    var repo: GitHubRepo?
+    var pulls = [GitHubPullRequest]()
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -25,27 +25,27 @@ class ReposController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard !repos.isEmpty else {
+        guard !pulls.isEmpty else {
             return
         }
         
-        if let controller = segue.destination as? PullsController,
+        if let controller = segue.destination as? DiffController,
             let selectedIndexPath = tableView.indexPathForSelectedRow {
-            controller.repo = repos[selectedIndexPath.row]
+            controller.pullRequest = pulls[selectedIndexPath.row]
         }
     }
 
     fileprivate func prepareData() {
         
-        guard let user = user else {
+        guard let repo = repo else {
             return
         }
         
-        GitHubClient.repos(user) { (repos, error) in
-            guard let repos = repos else {
+        GitHubClient.pulls(repo) { (pulls, error) in
+            guard let pulls = pulls else {
                 return
             }
-            self.repos = repos
+            self.pulls = pulls
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -54,30 +54,30 @@ class ReposController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        guard !repos.isEmpty else {
+        guard !pulls.isEmpty else {
             return 0
         }
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard !repos.isEmpty else {
+        guard !pulls.isEmpty else {
             return 0
         }
-        return repos.count
+        return pulls.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
-        guard !repos.isEmpty else {
+        guard !pulls.isEmpty else {
             return cell
         }
         
-        let repo = repos[indexPath.row]
-        cell.textLabel?.text = repo.name
-        cell.detailTextLabel?.text = repo.description
-
+        let pr = pulls[indexPath.row]
+        cell.textLabel?.text = pr.title
+        cell.detailTextLabel?.text = pr.diffUrl
+        
         return cell
     }
     

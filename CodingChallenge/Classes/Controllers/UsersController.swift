@@ -6,7 +6,6 @@
 //  Copyright © 2017 Procore. All rights reserved.
 //
 
-import UIKit
 import GitHub
 
 class UsersController: UITableViewController {
@@ -33,8 +32,6 @@ class UsersController: UITableViewController {
             let selectedIndexPath = tableView.indexPathForSelectedRow {
             controller.user = results.users[selectedIndexPath.row]
         }
-        
-        
     }
     
     fileprivate func prepareData() {

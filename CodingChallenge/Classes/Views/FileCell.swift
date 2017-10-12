@@ -8,6 +8,7 @@
 
 import UIKit
 import GitHub
+import PatchLabel
 
 class FileCell: UITableViewCell {
     
@@ -89,23 +90,10 @@ extension FileCell {
             return
         }
         
-        let label = UILabel()
+        let label = PatchLabel()
         label.numberOfLines = 0
-        label.text = patch
         label.font = UIFont.systemFont(ofSize: 8)
-
-//        var bgColor: UIColor = .white
-//        
-//        if line.starts(with: "@@ ") {
-//            bgColor = UIColor.blue.withAlphaComponent(0.05)
-//        }
-//        if line.starts(with: "+") {
-//            bgColor = UIColor.green.withAlphaComponent(0.2)
-//        }
-//        if line.starts(with: "-") {
-//            bgColor = UIColor.red.withAlphaComponent(0.2)
-//        }
-//        label.backgroundColor = bgColor
+        label.text = patch
 
         stackView.addArrangedSubview(label)
     }

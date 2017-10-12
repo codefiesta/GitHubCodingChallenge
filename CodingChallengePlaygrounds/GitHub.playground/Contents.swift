@@ -2,7 +2,7 @@
   
 import UIKit
 import PlaygroundSupport
-import GitHub
+//import GitHub
 
 extension String {
     
@@ -14,70 +14,70 @@ extension String {
 
 //PlaygroundPage.current.needsIndefiniteExecution = true
 
-func run() {
-
-    // Find the users and chain the requests
-    GitHubClient.users(query: "CosmicMind") { (result, error) in
-        guard let result = result, !result.users.isEmpty else {
-            PlaygroundPage.current.finishExecution()
-        }
-        
-        repos(result.users.first)
-    }
-}
-
-
-func repos(_ user: GitHubUser?) {
-    
-    guard let user = user else {
-        PlaygroundPage.current.finishExecution()
-    }
-
-    print("🤔 \(user)")
-    
-    GitHubClient.repos(user) { (repos, error) in
-        guard let repos = repos, !repos.isEmpty else {
-            PlaygroundPage.current.finishExecution()
-        }
-        
-        for repo in repos {
-            pulls(repo)
-        }
-    }
-}
-
-func pulls(_ repo: GitHubRepo?) {
-    
-    guard let repo = repo else {
-        PlaygroundPage.current.finishExecution()
-    }
-    print("😼 \(repo)")
-    
-    GitHubClient.pulls(repo) { (results, error) in
-        guard let results = results else {
-            PlaygroundPage.current.finishExecution()
-        }
-        
-        for pr in results {
-            print("🔂 [\(pr.number)] \(pr.title) => \(pr.diffUrl)")
-            files(pr)
-        }
-    }
-}
-
-func files(_ pr: GitHubPullRequest?) {
-    GitHubClient.files(pr) { (files, error) in
-        guard let files = files else {
-            PlaygroundPage.current.finishExecution()
-        }
-        
-        for file in files {
-            print("📁 [\(file.name)] +\(file.additions) -\(file.deletions) \(file.changes)")
-        }
-        // All done, fininsh the execution
-        PlaygroundPage.current.finishExecution()
-    }
-}
+//func run() {
+//
+//    // Find the users and chain the requests
+//    GitHubClient.users(query: "CosmicMind") { (result, error) in
+//        guard let result = result, !result.users.isEmpty else {
+//            PlaygroundPage.current.finishExecution()
+//        }
+//
+//        repos(result.users.first)
+//    }
+//}
+//
+//
+//func repos(_ user: GitHubUser?) {
+//
+//    guard let user = user else {
+//        PlaygroundPage.current.finishExecution()
+//    }
+//
+//    print("🤔 \(user)")
+//
+//    GitHubClient.repos(user) { (repos, error) in
+//        guard let repos = repos, !repos.isEmpty else {
+//            PlaygroundPage.current.finishExecution()
+//        }
+//
+//        for repo in repos {
+//            pulls(repo)
+//        }
+//    }
+//}
+//
+//func pulls(_ repo: GitHubRepo?) {
+//
+//    guard let repo = repo else {
+//        PlaygroundPage.current.finishExecution()
+//    }
+//    print("😼 \(repo)")
+//
+//    GitHubClient.pulls(repo) { (results, error) in
+//        guard let results = results else {
+//            PlaygroundPage.current.finishExecution()
+//        }
+//
+//        for pr in results {
+//            print("🔂 [\(pr.number)] \(pr.title) => \(pr.diffUrl)")
+//            files(pr)
+//        }
+//    }
+//}
+//
+//func files(_ pr: GitHubPullRequest?) {
+//    GitHubClient.files(pr) { (files, error) in
+//        guard let files = files else {
+//            PlaygroundPage.current.finishExecution()
+//        }
+//
+//        for file in files {
+//            print("📁 [\(file.name)] +\(file.additions) -\(file.deletions) \(file.changes)")
+//        }
+//        // All done, fininsh the execution
+//        PlaygroundPage.current.finishExecution()
+//    }
+//}
 
 //run()
 
@@ -96,8 +96,9 @@ func patchFile() -> String? {
 }
 
 let firstLinePattern = "^(.+)\n"
-let deletionLinePattern = "\n\\-(.*)?\n"
-let additionLinePattern = "\n\\+(.*)?\n"
+let deletionLinePattern = "(\n?\\-\\s.*)\n"
+let additionLinePattern = "\n(\\+\\s.*)\n"
+//let additionLinePattern = "\n\\+(.*?)?\n"
 
 func testPatchRegex() {
     
@@ -107,13 +108,13 @@ func testPatchRegex() {
     print(text)
     
     do {
-        let regex = try NSRegularExpression(pattern: deletionLinePattern, options: .caseInsensitive)
+        let regex = try NSRegularExpression(pattern: additionLinePattern, options: .caseInsensitive)
         let matches = regex.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.utf16.count))
         if !matches.isEmpty {
             for match in matches {
                 let range = match.range(at: 1)
                 if let group = text.substring(with: range) {
-                    print("🐳 \(group)")
+                    print("🐳\(group)")
                 }
             }
         } else {

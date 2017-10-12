@@ -4,7 +4,15 @@ import UIKit
 import PlaygroundSupport
 import GitHub
 
-PlaygroundPage.current.needsIndefiniteExecution = true
+extension String {
+    
+    func substring(with nsrange: NSRange) -> Substring? {
+        guard let range = Range(nsrange, in: self) else { return nil }
+        return self[range]
+    }
+}
+
+//PlaygroundPage.current.needsIndefiniteExecution = true
 
 func run() {
 
@@ -50,14 +58,9 @@ func pulls(_ repo: GitHubRepo?) {
             PlaygroundPage.current.finishExecution()
         }
         
-        for (index, pr) in results.enumerated() {
+        for pr in results {
             print("🔂 [\(pr.number)] \(pr.title) => \(pr.diffUrl)")
             files(pr)
-
-            if index == results.count {
-                // All done, fininsh the execution
-                PlaygroundPage.current.finishExecution()
-            }
         }
     }
 }
@@ -71,8 +74,52 @@ func files(_ pr: GitHubPullRequest?) {
         for file in files {
             print("📁 [\(file.name)] +\(file.additions) -\(file.deletions) \(file.changes)")
         }
+        // All done, fininsh the execution
+        PlaygroundPage.current.finishExecution()
     }
 }
 
-run()
+//run()
+
+func patchFile() -> String? {
+    guard let url = Bundle.main.url(forResource: "Patch1", withExtension: "txt") else {
+        return nil
+    }
+    
+    do {
+        let string = try String(contentsOf: url)
+        return string
+    } catch {
+        print("Error loading test patch file: \(error)")
+    }
+    return nil
+}
+
+func testPatchRegex() {
+    
+    guard let text = patchFile() else {
+        return
+    }
+    print(text)
+    let firstLinePattern = "^(.+)\n"
+    
+    do {
+        let regex = try NSRegularExpression(pattern: firstLinePattern, options: .caseInsensitive)
+        let matches = regex.matches(in: text, options: .reportCompletion, range: NSMakeRange(0, text.utf16.count))
+        if !matches.isEmpty {
+            for match in matches {
+                let range = match.range(at: 1)
+                if let group = text.substring(with: range) {
+                    print("🐳 \(group)")
+                }
+            }
+        } else {
+            print("💩")
+        }
+    } catch {
+        print("Error: \(error)")
+    }
+    
+}
+testPatchRegex()
 

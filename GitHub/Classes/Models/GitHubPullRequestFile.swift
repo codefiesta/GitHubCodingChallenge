@@ -18,20 +18,6 @@ public struct GitHubPullRequestFile: Codable {
     public var changes: Int
     public var contentsUrl: String
     public var patch: String
-    
-    public lazy var leftLines: [String] = {
-        let lines = patch.components(separatedBy: .newlines).filter({ (line) -> Bool in
-            return !line.starts(with: "+")
-        })
-        return lines
-    }()
-
-    public lazy var rightLines: [String] = {
-        let lines = patch.components(separatedBy: .newlines).filter({ (line) -> Bool in
-            return !line.starts(with: "-")
-        })
-        return lines
-    }()
 
     enum CodingKeys: String, CodingKey {
         case name = "filename"

@@ -76,42 +76,36 @@ class FileCell: UITableViewCell {
     
     func prepare(_ file: GitHubPullRequestFile) {
         
-        var file = file
-        for line in file.leftLines {
-            prepareLine(line, stackView: leftView)
-        }
-        
-        for line in file.rightLines {
-            prepareLine(line, stackView: rightView)
-        }
+        preparePatch(file.patch, stackView: leftView)
+        preparePatch(file.patch, stackView: rightView)
     }
 }
 
 extension FileCell {
     
-    fileprivate func prepareLine(_ line: String?, stackView: UIStackView) {
+    fileprivate func preparePatch(_ patch: String?, stackView: UIStackView) {
 
-        guard let line = line else {
+        guard let patch = patch else {
             return
         }
         
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = line
+        label.text = patch
         label.font = UIFont.systemFont(ofSize: 8)
 
-        var bgColor: UIColor = .white
-        
-        if line.starts(with: "@@ ") {
-            bgColor = UIColor.blue.withAlphaComponent(0.05)
-        }
-        if line.starts(with: "+") {
-            bgColor = UIColor.green.withAlphaComponent(0.2)
-        }
-        if line.starts(with: "-") {
-            bgColor = UIColor.red.withAlphaComponent(0.2)
-        }
-        label.backgroundColor = bgColor
+//        var bgColor: UIColor = .white
+//        
+//        if line.starts(with: "@@ ") {
+//            bgColor = UIColor.blue.withAlphaComponent(0.05)
+//        }
+//        if line.starts(with: "+") {
+//            bgColor = UIColor.green.withAlphaComponent(0.2)
+//        }
+//        if line.starts(with: "-") {
+//            bgColor = UIColor.red.withAlphaComponent(0.2)
+//        }
+//        label.backgroundColor = bgColor
 
         stackView.addArrangedSubview(label)
     }

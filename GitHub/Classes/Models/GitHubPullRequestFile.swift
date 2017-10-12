@@ -24,8 +24,11 @@ public struct GitHubPullRequestFile: Codable {
         guard let patch = patch else {
             return []
         }
-        let lines = patch.components(separatedBy: .newlines)
-       return lines
+        return patch.components(separatedBy: .newlines)
+    }()
+
+    public lazy var length: Int = {
+        return patch?.lengthOfBytes(using: .utf8) ?? 0
     }()
 
     // Build a tuple of headers

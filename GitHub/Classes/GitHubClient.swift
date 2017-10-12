@@ -66,6 +66,7 @@ public struct GitHubClient {
         print("Finding 📄 -> \(pr.filesUrl)")
 
         request(pr.filesUrl) { (results: [GitHubPullRequestFile]?, error) in
+            print("Found \(results?.count ?? 0) 📄")
             return completion(results, error)
         }
     }

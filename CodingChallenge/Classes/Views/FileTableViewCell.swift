@@ -8,11 +8,11 @@
 
 import UIKit
 import GitHub
-import PatchLabel
 
 class FileTableViewCell: UITableViewCell {
     
-    var maxChanges: Int = 500 // The max number of changes allowed when rendering the diff
+    var maxChanges: Int = 200 // The max number of changes allowed when rendering the diff
+    var activityIndicatorView: UIActivityIndicatorView!
     var containerView: UIStackView! // The master vertical stackview
     var splitView: UIStackView! // The horizontal split stackview
     var leftView: UIStackView! // The deletions view
@@ -30,6 +30,7 @@ class FileTableViewCell: UITableViewCell {
     
     fileprivate func prepare() {
         selectionStyle = .none
+        prepareActivityIndicatorView()
         prepareContainerView()
         prepareSingleView()
         prepareLeftView()
@@ -56,6 +57,12 @@ class FileTableViewCell: UITableViewCell {
         }
     }
 
+    fileprivate func prepareActivityIndicatorView() {
+        activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.hidesWhenStopped = true
+        addSubview(activityIndicatorView)
+    }
+    
     fileprivate func prepareLeftView() {
         leftView = UIStackView()
         leftView.translatesAutoresizingMaskIntoConstraints = false
@@ -107,8 +114,8 @@ class FileTableViewCell: UITableViewCell {
     func prepare(_ file: GitHubPullRequestFile) {
         
         var file = file
-        
-        guard file.changes < maxChanges else {
+        let lines = file.lines
+        guard lines.count < maxChanges else {
             prepareLine("Large diffs are not rendered by default", stackView: singleView)
             return
         }
@@ -116,7 +123,7 @@ class FileTableViewCell: UITableViewCell {
         let header = file.header
         var leftLineNo = header.fromFileStart
         var rightLineNo = header.toFileStart
-        for (index, line) in file.lines.enumerated() {
+        for (index, line) in lines.enumerated() {
             
             if index == 0 {
                 // Put the header into the single view (so it appears more like a header)
@@ -124,28 +131,28 @@ class FileTableViewCell: UITableViewCell {
             } else {
                 
                 if file.deletions > 0, !line.starts(with: "+") {
+                    let lineNo = leftLineNo
                     let stackView: UIStackView! = file.additions != 0 ? leftView : singleView
-                    prepareLine(line, leftLineNo, stackView: stackView)
+                    prepareLine(line, lineNo, stackView: stackView)
                     leftLineNo += 1
-
                 }
                 if file.additions > 0, !line.starts(with: "-") {
+                    let lineNo = rightLineNo
                     let stackView: UIStackView! = file.deletions != 0 ? rightView: singleView
-                    prepareLine(line, rightLineNo, stackView: stackView)
+                    prepareLine(line, lineNo, stackView: stackView)
                     rightLineNo += 1
-
                 }
             }
         }
-        
+        setNeedsDisplay()
     }
 }
 
 extension FileTableViewCell {
     
-    fileprivate func prepareLine(_ line: String?, _ lineNo: Int? = nil, stackView: UIStackView) {
+    fileprivate func prepareLine(_ line: String?, _ lineNo: Int? = nil, stackView: UIStackView?) {
 
-        guard let line = line else {
+        guard let line = line, let stackView = stackView else {
             return
         }
         
@@ -153,19 +160,20 @@ extension FileTableViewCell {
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 8)
         label.text = line
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         var bgColor: UIColor = .white
         
         if line.starts(with: "@@ ") {
-            bgColor = UIColor.blue.withAlphaComponent(0.05)
+            bgColor = UIColor.blue
         }
         if line.starts(with: "+") {
-            bgColor = UIColor.green.withAlphaComponent(0.2)
+            bgColor = UIColor.green
         }
         if line.starts(with: "-") {
-            bgColor = UIColor.red.withAlphaComponent(0.2)
+            bgColor = UIColor.red
         }
-        label.backgroundColor = bgColor
+        label.backgroundColor = bgColor.withAlphaComponent(0.2)
 
         if let lineNo = lineNo {
             
@@ -176,26 +184,19 @@ extension FileTableViewCell {
             lineGutterStack.distribution = .fill
             lineGutterStack.isLayoutMarginsRelativeArrangement = true
             
-            // Use a button here instead of a label since a button allows us to align vertically
-            let lineButton = UIButton(type: .custom)
-            lineButton.setTitleColor(UIColor.gray, for: .normal)
-            lineButton.setTitle("\(lineNo)", for: .normal)
-            lineButton.titleLabel?.font = UIFont.systemFont(ofSize: 8)
-            lineButton.titleLabel?.numberOfLines = 1
-            lineButton.contentVerticalAlignment = .top
-            lineButton.contentHorizontalAlignment = .left
-            lineButton.isEnabled = false
-            lineButton.titleLabel?.textColor = UIColor.gray
-            lineButton.titleLabel?.text = "\(lineNo)"
-            lineButton.backgroundColor = bgColor
+            let lineLabel = PatchLabel()
+            lineLabel.text = "\(lineNo)"
+            lineLabel.font = UIFont.systemFont(ofSize: 8)
+            lineLabel.textColor = UIColor.gray
+            lineLabel.backgroundColor = bgColor.withAlphaComponent(0.4)
             
             // Set the content compression and content hugging to 'squeeze' the gutter to the left
-            lineButton.setContentCompressionResistancePriority(UILayoutPriority.fittingSizeLevel, for: .horizontal)
+            lineLabel.setContentCompressionResistancePriority(UILayoutPriority.fittingSizeLevel, for: .horizontal)
             label.setContentCompressionResistancePriority(UILayoutPriority.fittingSizeLevel, for: .horizontal)
-            lineButton.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+            lineLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
             label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
             
-            lineGutterStack.addArrangedSubview(lineButton)
+            lineGutterStack.addArrangedSubview(lineLabel)
             lineGutterStack.addArrangedSubview(label)
             
             stackView.addArrangedSubview(lineGutterStack)
@@ -204,5 +205,36 @@ extension FileTableViewCell {
             stackView.addArrangedSubview(label)
         }
     }
+}
+
+class PatchLabel: UILabel {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func drawText(in rect: CGRect) {
+        
+        // Pushes the label up to the top
+        if let stringText = text {
+            let stringTextAsNSString = stringText as NSString
+            let labelStringSize = stringTextAsNSString.boundingRect(with: CGSize(width: self.frame.width,height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil).size
+            
+            let r = CGRect(x:0, y: 0, width: self.frame.width, height:ceil(labelStringSize.height))
+            
+            super.drawText(in: r)
+        } else {
+            super.drawText(in: rect)
+        }
+    }
+
 }
 

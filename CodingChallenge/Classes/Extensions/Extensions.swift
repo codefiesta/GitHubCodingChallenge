@@ -23,6 +23,16 @@ extension UIView {
         NSLayoutConstraint(item: parent, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
         
     }
+    
+    // Centers a view to it's parent view via layout constraints
+    func centerInParent() {
+        guard let parent = superview else {
+            return
+        }
+        
+        NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: parent, attribute: .centerX, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: parent, attribute: .centerY, multiplier: 1.0, constant: 0.0).isActive = true
+    }
 }
 
 extension Date {

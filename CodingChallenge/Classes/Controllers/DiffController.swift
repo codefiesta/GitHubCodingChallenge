@@ -43,6 +43,7 @@ class DiffController: UITableViewController {
             }
             self.files = files
             DispatchQueue.main.async {
+                self.title = "#\(pullRequest.number)"
                 self.tableView.reloadData()
             }
         }

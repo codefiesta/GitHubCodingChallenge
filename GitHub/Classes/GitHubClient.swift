@@ -57,11 +57,12 @@ public struct GitHubClient {
     // Fetches the files for the specified PR
     public static func files(_ pr: GitHubPullRequest?, _ completion: @escaping ([GitHubPullRequestFile]?, Error?) -> Void) {
         
-        print("Finding 📄")
         guard let pr = pr else {
             return completion(nil, nil)
         }
         
+        print("Finding 📄 -> \(pr.filesUrl)")
+
         request(pr.filesUrl) { (results: [GitHubPullRequestFile]?, error) in
             return completion(results, error)
         }

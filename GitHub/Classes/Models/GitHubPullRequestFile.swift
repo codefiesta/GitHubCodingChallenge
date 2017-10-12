@@ -17,7 +17,7 @@ public struct GitHubPullRequestFile: Codable {
     public var deletions: Int
     public var changes: Int
     public var contentsUrl: String
-    public var patch: String
+    public var patch: String?
     
     enum CodingKeys: String, CodingKey {
         case name = "filename"

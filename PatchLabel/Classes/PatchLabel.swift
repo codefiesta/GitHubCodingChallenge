@@ -12,15 +12,28 @@ import UIKit
 // Inspired from ActiveLabel cocoapod: https://github.com/optonaut/ActiveLabel.swift
 open class PatchLabel: UILabel {
     
-    fileprivate let firstLinePattern = "^(.+)\n"
-    fileprivate let deletionLinePattern = "\n(\\-\\s.*)"
-    fileprivate let additionLinePattern = "\n(\\+\\s.*)"
+    fileprivate static let firstLinePattern = "^(.+)\n"
+    fileprivate static let deletionLinePattern = "\n(\\-.*)"
+    fileprivate static let additionLinePattern = "\n(\\+.*)"
 
+    fileprivate let attributions: [String: Any] = [
+            firstLinePattern: UIColor.blue.withAlphaComponent(0.05),
+            deletionLinePattern: UIColor.red.withAlphaComponent(0.05),
+            additionLinePattern: UIColor.green.withAlphaComponent(0.05)
+         ]
+
+    open var addition: Bool = true {
+        didSet {
+            
+        }
+    }
+    
     override open var text: String? {
         didSet {
             attribute()
         }
     }
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -32,7 +45,7 @@ open class PatchLabel: UILabel {
     open override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+        
     fileprivate func attribute() {
         
         guard let text = text else {
@@ -43,46 +56,17 @@ open class PatchLabel: UILabel {
             let attributedString = NSMutableAttributedString(string: text)
             attributedText = attributedString
         }
-        
-        attributeFirstLine()
-        attributeAdditionLines()
-        attributeDeletionLines()
-    }
-    
-    fileprivate func attributeFirstLine() {
-        
-        guard let attributedString = attributedText as? NSMutableAttributedString else {
-            return
-        }
-        
-        let matches = match(firstLinePattern)
-        for match in matches {
-            let range = match.range(at: 1)
-            attributedString.addAttribute(NSAttributedStringKey.backgroundColor, value: UIColor.blue.withAlphaComponent(0.05), range: range)
-        }
-    }
 
-    fileprivate func attributeAdditionLines() {
         guard let attributedString = attributedText as? NSMutableAttributedString else {
             return
         }
-        
-        let matches = match(additionLinePattern)
-        for match in matches {
-            let range = match.range(at: 1)
-            attributedString.addAttribute(NSAttributedStringKey.backgroundColor, value: UIColor.green.withAlphaComponent(0.05), range: range)
-        }
-    }
 
-    fileprivate func attributeDeletionLines() {
-        guard let attributedString = attributedText as? NSMutableAttributedString else {
-            return
-        }
-        
-        let matches = match(deletionLinePattern)
-        for match in matches {
-            let range = match.range(at: 1)
-            attributedString.addAttribute(NSAttributedStringKey.backgroundColor, value: UIColor.red.withAlphaComponent(0.05), range: range)
+        for (regex, color) in attributions {
+            let matches = match(regex)
+            for match in matches {
+                let range = match.range(at: 1)
+                attributedString.addAttribute(NSAttributedStringKey.backgroundColor, value: color, range: range)
+            }
         }
     }
     

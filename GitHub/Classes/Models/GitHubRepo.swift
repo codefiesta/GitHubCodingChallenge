@@ -12,7 +12,7 @@ import Foundation
 public struct GitHubRepo: Codable {
     
     public var name: String
-    public var description: String
+    public var description: String?
     public var pullsUrl: String
     
     enum CodingKeys: String, CodingKey {
@@ -26,7 +26,7 @@ public struct GitHubRepo: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        description = try values.decode(String.self, forKey: .description)
+        description = try values.decodeIfPresent(String.self, forKey: .description)
         pullsUrl = try values.decode(String.self, forKey: .pullsUrl).replacingOccurrences(of: "{/number}", with: "")
     }
 }

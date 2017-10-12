@@ -10,6 +10,8 @@ import GitHub
 
 class UsersController: UITableViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar?
+    
     let cellIdentifier = "Cell"
     var results: GitHubSearchResults?
     
@@ -19,6 +21,7 @@ class UsersController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepare()
         prepareData()
     }
 
@@ -34,8 +37,17 @@ class UsersController: UITableViewController {
         }
     }
     
+    fileprivate func prepare() {
+        searchBar?.text = "Magicalpanda"
+    }
+    
     fileprivate func prepareData() {
-        GitHubClient.users(query: "CosmicMind") { (results, error) in
+        
+        guard let query = searchBar?.text else {
+            return
+        }
+        
+        GitHubClient.users(query: query) { (results, error) in
             guard let results = results else {
                 return
             }
@@ -76,6 +88,14 @@ class UsersController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension UsersController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        prepareData()
     }
 }
 

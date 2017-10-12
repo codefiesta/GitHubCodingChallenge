@@ -12,9 +12,11 @@ import PatchLabel
 
 class FileCell: UITableViewCell {
     
-    var splitView: UIStackView!
-    var leftView: UIStackView!
-    var rightView: UIStackView!
+    var maxChanges: Int = 500 // The max number of changes allowed when rendering the diff
+    var splitView: UIStackView! // The horizontal split stackview
+    var leftView: UIStackView! // The deletions view
+    var rightView: UIStackView! // The additions view
+    var singleView: UIStackView! // Used when only additions or deletions have ocurred
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,6 +32,7 @@ class FileCell: UITableViewCell {
         prepareLeftView()
         prepareRightView()
         prepareSplitView()
+        prepareSingleView()
     }
     
     override func prepareForReuse() {
@@ -42,6 +45,11 @@ class FileCell: UITableViewCell {
         
         for view in rightView.arrangedSubviews {
             rightView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
+        for view in singleView.arrangedSubviews {
+            singleView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
     }
@@ -74,11 +82,32 @@ class FileCell: UITableViewCell {
         splitView.addArrangedSubview(leftView)
         splitView.addArrangedSubview(rightView)
     }
+
+    fileprivate func prepareSingleView() {
+        singleView = UIStackView()
+        singleView.translatesAutoresizingMaskIntoConstraints = false
+        singleView.axis = .vertical
+        singleView.distribution = .fillEqually
+        singleView.isLayoutMarginsRelativeArrangement = true
+        addSubview(singleView)
+        singleView.fitToParent()
+    }
+
     
     func prepare(_ file: GitHubPullRequestFile) {
         
-        preparePatch(file.patch, stackView: leftView)
-        preparePatch(file.patch, stackView: rightView)
+        guard file.changes < maxChanges else {
+            preparePatch("Large diffs are not rendered by default", stackView: leftView)
+            return
+        }
+        if file.deletions > 0 {
+            let stackView: UIStackView! = file.additions != 0 ? leftView : singleView
+            preparePatch(file.patch, stackView: stackView)
+        }
+        if file.additions > 0 {
+            let stackView: UIStackView! = file.deletions != 0 ? rightView: singleView
+            preparePatch(file.patch, stackView: stackView)
+        }
     }
 }
 

@@ -22,15 +22,12 @@ open class PatchLabel: UILabel {
         additionLinePattern: UIColor.green.withAlphaComponent(0.05)
     ]
 
-    open var addition: Bool = true {
-        didSet {
-            
-        }
-    }
+    // If set to true, will remove the addition lines, otherwise remove the deletion lines
+    open var isDeleting: Bool = true
     
     override open var text: String? {
         didSet {
-            attribute()
+            //attribute()
         }
     }
 
@@ -46,9 +43,9 @@ open class PatchLabel: UILabel {
         super.awakeFromNib()
     }
         
-    fileprivate func attribute() {
+    public func attribute() {
         
-        guard let text = text else {
+        guard let text = cleanText() else {
             return
         }
         
@@ -60,7 +57,7 @@ open class PatchLabel: UILabel {
         guard let attributedString = attributedText as? NSMutableAttributedString else {
             return
         }
-
+        
         for (regex, color) in attributions {
             let matches = match(regex)
             for match in matches {
@@ -68,6 +65,28 @@ open class PatchLabel: UILabel {
                 attributedString.addAttribute(NSAttributedStringKey.backgroundColor, value: color, range: range)
             }
         }
+    
+    }
+    
+    fileprivate func cleanText() -> String? {
+        guard let txt = text else {
+            return nil
+        }
+        
+        var cleaned = txt
+        let pattern = isDeleting ? PatchLabel.additionLinePattern : PatchLabel.deletionLinePattern
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+            
+            let range = NSRange(location: 0, length: txt.utf16.count)
+            cleaned = regex.stringByReplacingMatches(in: txt, options: NSRegularExpression.MatchingOptions.withTransparentBounds, range: range, withTemplate: "")
+            text = cleaned
+        } catch {
+            print("Error Matching: \(error)")
+        }
+
+        
+        return text
     }
     
     // Finds the regex matches
@@ -85,5 +104,18 @@ open class PatchLabel: UILabel {
             print("Error Matching: \(error)")
         }
         return []
+    }
+}
+
+extension PatchLabel {
+    
+    override open func drawText(in rect: CGRect) {
+        if let stringText = text {
+            let stringTextAsNSString = stringText as NSString
+            let labelStringSize = stringTextAsNSString.boundingRect(with: CGSize(width: self.frame.width,height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil).size
+            super.drawText(in: CGRect(x:0,y: 0,width: self.frame.width, height:ceil(labelStringSize.height)))
+        } else {
+            super.drawText(in: rect)
+        }
     }
 }

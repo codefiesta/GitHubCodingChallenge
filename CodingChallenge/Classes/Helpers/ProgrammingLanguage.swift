@@ -20,6 +20,7 @@ enum ProgrammingLanguage: String {
     case shell = "Shell"
     case swift = "Swift"
 
+    // Color coding for the language
     var color: UIColor {
         switch self {
         case .c:
@@ -33,11 +34,11 @@ enum ProgrammingLanguage: String {
         case .javaScript:
             return UIColor.yellow
         case .objectiveC:
-            return UIColor.cyan
+            return UIColor(red: 44/255, green: 152/255, blue: 239/255, alpha: 1.0)
         case .python:
-            return UIColor.blue
+            return UIColor(red: 65/255, green: 84/255, blue: 178/255, alpha: 1.0)
         case .shell:
-            return UIColor.brown
+            return UIColor(red: 140/255, green: 192/255, blue: 82/255, alpha: 1.0)
         case .swift:
             return UIColor.orange
         }

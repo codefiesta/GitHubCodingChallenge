@@ -49,12 +49,17 @@ class ReposController: UITableViewController {
             return
         }
         
+        tableView.refreshControl?.beginRefreshing()
         GitHubClient.repos(user) { (repos, error) in
             guard let repos = repos else {
+                DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                }
                 return
             }
             self.repos = repos
             DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             }
             
@@ -62,6 +67,10 @@ class ReposController: UITableViewController {
                 self.handleNoRepos()
             }
         }
+    }
+    
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        prepareData()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

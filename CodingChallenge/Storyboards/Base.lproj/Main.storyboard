@@ -97,6 +97,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Search GitHub" id="cyf-bN-Qq5"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="rgU-Lf-88r">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="Xcc-Ue-HYm" eventType="valueChanged" id="8YN-jt-naq"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="searchBar" destination="uJZ-i3-tqD" id="Gav-jY-Pdy"/>
                     </connections>
@@ -184,6 +190,12 @@
                             <outlet property="delegate" destination="pbx-op-Ok1" id="X3e-BW-xQc"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="PGU-F9-zdZ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="pbx-op-Ok1" eventType="valueChanged" id="1JH-YT-cAi"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ugt-TH-xhl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -231,6 +243,12 @@
                             <outlet property="delegate" destination="Mrg-fd-VCq" id="38l-Qf-P9I"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Tt7-vg-Q7w">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="Mrg-fd-VCq" eventType="valueChanged" id="hAa-mb-cnS"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C11-4e-cVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

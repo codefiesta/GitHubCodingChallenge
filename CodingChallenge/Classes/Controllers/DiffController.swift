@@ -30,6 +30,11 @@ class DiffController: UITableViewController {
         prepareData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        cache.removeAllObjects()
+    }
+    
     fileprivate func prepareActivityIndicatorView() {
         activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicatorView.hidesWhenStopped = true
@@ -146,7 +151,7 @@ extension DiffController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         
         indexPaths.forEach { (indexPath) in
-            print("🙊 Cancelling prefetch \(indexPath)")
+            print("🙊 Cancelling prefetch \(indexPath)") // No network calls so let it run
         }
     }
 }

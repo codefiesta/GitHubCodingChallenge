@@ -49,12 +49,17 @@ class PullsController: UITableViewController {
             return
         }
         
+        tableView.refreshControl?.beginRefreshing()
         GitHubClient.pulls(repo) { (pulls, error) in
             guard let pulls = pulls else {
+                DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                }
                 return
             }
             self.pulls = pulls
             DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             }
             
@@ -65,6 +70,10 @@ class PullsController: UITableViewController {
         }
     }
     
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        prepareData()
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         guard !pulls.isEmpty else {

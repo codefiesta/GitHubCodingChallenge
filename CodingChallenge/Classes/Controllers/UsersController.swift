@@ -8,6 +8,11 @@
 
 import GitHub
 
+enum SearchError: Error {
+    case emptyText
+    case noResults
+}
+
 class UsersController: UITableViewController {
 
     @IBOutlet weak var searchBar: UISearchBar?
@@ -40,7 +45,7 @@ class UsersController: UITableViewController {
     }
     
     fileprivate func prepareSearchBar() {
-        searchBar?.text = "Magicalpanda"
+        searchBar?.text = "Google"
         searchBar?.enableCancelKeyAccessory()
     }
     
@@ -56,15 +61,25 @@ class UsersController: UITableViewController {
             return
         }
         
+        tableView.refreshControl?.beginRefreshing()
         GitHubClient.users(query: query) { (results, error) in
-            guard let results = results else {
+            guard let results = results, !results.users.isEmpty else {
+                DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                    self.handleSearchError(.noResults)
+                }
                 return
             }
             self.results = results
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()                
             }
         }
+    }
+    
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        prepareData()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -95,6 +110,12 @@ class UsersController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let backgroundColor: UIColor = (indexPath.row % 2 == 0) ? UIColor.white : UIColor.gray.withAlphaComponent(0.05)
+        cell.backgroundColor = backgroundColor
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -104,7 +125,33 @@ extension UsersController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        
+        guard let text = searchBar.text, !text.isEmpty else {
+            handleSearchError(.emptyText)
+            return
+        }
+        
         prepareData()
     }
 }
 
+extension UsersController {
+    
+    fileprivate func handleSearchError(_ error: SearchError) {
+        let title = "Search Error"
+        var message = "Please enter the name of a GitHub user. For example 'MagicalPanda'"
+
+        switch error {
+        case .emptyText:
+            break
+        case .noResults:
+            message = "No results found for '\(searchBar?.text ?? "")'"
+        }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            (alert: UIAlertAction) -> Void in
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+}

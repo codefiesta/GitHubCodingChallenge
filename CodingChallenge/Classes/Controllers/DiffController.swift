@@ -10,6 +10,8 @@ import GitHub
 
 class DiffController: UITableViewController {
     
+    var activityIndicatorView: UIActivityIndicatorView!
+    
     let cellIdentifier = "Cell"
     var pullRequest: GitHubPullRequest?
     var files = [GitHubPullRequestFile]()
@@ -22,10 +24,26 @@ class DiffController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareNavigationItems()
+        prepareActivityIndicatorView()
         prepareTableView()
         prepareData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        cache.removeAllObjects()
+    }
+    
+    fileprivate func prepareActivityIndicatorView() {
+        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicatorView)
+        view.bringSubview(toFront: activityIndicatorView)
+        activityIndicatorView.centerInParent()
+    }
+
     fileprivate func prepareTableView() {
         tableView.prefetchDataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -40,14 +58,16 @@ class DiffController: UITableViewController {
             return
         }
         
+        title = "#\(pullRequest.number)"
+        activityIndicatorView.startAnimating()
         GitHubClient.files(pullRequest) { (files, error) in
             guard let files = files else {
                 return
             }
             self.files = files
             DispatchQueue.main.async {
-                self.title = "#\(pullRequest.number)"
                 self.tableView.reloadData()
+                self.activityIndicatorView.stopAnimating()
             }
         }
     }
@@ -131,7 +151,7 @@ extension DiffController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         
         indexPaths.forEach { (indexPath) in
-            print("🙊 Cancelling prefetch \(indexPath)")
+            print("🙊 Cancelling prefetch \(indexPath)") // No network calls so let it run
         }
     }
 }

@@ -92,3 +92,38 @@ extension UIImageView {
     }
     
 }
+
+extension UIViewController {
+    
+    func prepareNavigationItems() {
+        // Hides the back button text
+        let backButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButtonItem
+    }
+}
+
+extension UISearchBar {
+    
+    func enableCancelKeyAccessory() {
+        
+        // Add the cancel toolbar
+        let cancelToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        cancelToolbar.barStyle = .default
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleKeyboardDismiss))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        cancelToolbar.items = items
+        cancelToolbar.sizeToFit()
+        
+        self.inputAccessoryView = cancelToolbar
+    }
+    
+    @objc fileprivate func handleKeyboardDismiss() {
+        self.resignFirstResponder()
+    }
+}
+

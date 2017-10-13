@@ -49,6 +49,8 @@ class PullsController: UITableViewController {
             return
         }
         
+        title = "\(repo.name) Pull Requests"
+
         tableView.refreshControl?.beginRefreshing()
         GitHubClient.pulls(repo) { (pulls, error) in
             guard let pulls = pulls else {

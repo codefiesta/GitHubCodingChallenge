@@ -63,7 +63,18 @@ extension UIImageView {
         guard let urlString = urlString, let url = URL(string: urlString) else {
             return
         }
+
+        let cacheKey = NSString(string: urlString)
+        let cache = ImageCache.shared
         
+        if let cached = cache.object(forKey: cacheKey) {
+            DispatchQueue.main.async {
+                print("🦊 Cache Hit")
+                completion?(cached, nil)
+            }
+            return
+        }
+
         var request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 8.0)
         request.httpMethod = "GET"
 
@@ -80,8 +91,16 @@ extension UIImageView {
                 return
             }
 
+            guard let image = UIImage(data: data) else {
+                completion?(nil, error)
+                return
+            }
+
+            print("🐔 Caching")
+            cache.setObject(image, forKey: cacheKey)
+
             DispatchQueue.main.async {
-                let image = UIImage(data: data)
+
                 self.image = image
                 completion?(image, nil)
                 return

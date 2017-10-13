@@ -45,7 +45,7 @@ class UsersController: UITableViewController {
     }
     
     fileprivate func prepareSearchBar() {
-        searchBar?.text = "Google"
+        searchBar?.text = "MagicalPanda"
         searchBar?.enableCancelKeyAccessory()
     }
     
@@ -104,7 +104,13 @@ class UsersController: UITableViewController {
         
         let user = results.users[indexPath.row]
         
-        cell.primaryImageView?.image(fromUrl: user.avatarUrl, nil)
+        cell.activityIndicatorView.startAnimating()
+        cell.primaryImageView?.image(fromUrl: user.avatarUrl, { (image, error) in
+            DispatchQueue.main.async {
+                cell.primaryImageView?.image = image
+                cell.activityIndicatorView.stopAnimating()
+            }
+        })
         cell.titleLabel?.text = user.login
         cell.descLabel?.text = user.reposUrl
         return cell
@@ -112,7 +118,7 @@ class UsersController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let backgroundColor: UIColor = (indexPath.row % 2 == 0) ? UIColor.white : UIColor.gray.withAlphaComponent(0.05)
+        let backgroundColor: UIColor = (indexPath.row % 2 == 0) ? UIColor.white : UIColor.gray.withAlphaComponent(0.03)
         cell.backgroundColor = backgroundColor
     }
     

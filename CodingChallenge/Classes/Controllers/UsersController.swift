@@ -21,6 +21,7 @@ class UsersController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareNavigationItems()
         prepareSearchBar()
         prepareTableView()
         prepareData()
@@ -40,6 +41,7 @@ class UsersController: UITableViewController {
     
     fileprivate func prepareSearchBar() {
         searchBar?.text = "Magicalpanda"
+        searchBar?.enableCancelKeyAccessory()
     }
     
     fileprivate func prepareTableView() {

@@ -20,6 +20,7 @@ class PullsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareNavigationItems()
         prepareTableView()
         prepareData()
     }

@@ -20,6 +20,7 @@ class ReposController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareNavigationItems()
         prepareTableView()
         prepareData()
     }

@@ -11,7 +11,7 @@ import GitHub
 
 class FileTableViewCell: UITableViewCell {
     
-    var maxChanges: Int = 200 // The max number of changes allowed when rendering the diff
+    var maxChanges: Int = 300 // The max number of changes allowed when rendering the diff
     var activityIndicatorView: UIActivityIndicatorView!
     var containerView: UIStackView! // The master vertical stackview
     var splitView: UIStackView! // The horizontal split stackview
@@ -130,17 +130,22 @@ class FileTableViewCell: UITableViewCell {
                 prepareLine(line, stackView: singleView)
             } else {
                 
-                if file.deletions > 0, !line.starts(with: "+") {
+                if file.deletions > 0, !line.starts(with: "+"), !line.starts(with: "@@ ") {
                     let lineNo = leftLineNo
                     let stackView: UIStackView! = file.additions != 0 ? leftView : singleView
                     prepareLine(line, lineNo, stackView: stackView)
                     leftLineNo += 1
                 }
-                if file.additions > 0, !line.starts(with: "-") {
+                if file.additions > 0, !line.starts(with: "-"), !line.starts(with: "@@ ") {
                     let lineNo = rightLineNo
                     let stackView: UIStackView! = file.deletions != 0 ? rightView: singleView
                     prepareLine(line, lineNo, stackView: stackView)
                     rightLineNo += 1
+                }
+                
+                if line.starts(with: "@@ ") {
+                    prepareLine(line, stackView: leftView)
+                    prepareLine(line, stackView: rightView)
                 }
             }
         }
@@ -165,7 +170,12 @@ extension FileTableViewCell {
         var bgColor: UIColor = .white
         
         if line.starts(with: "@@ ") {
-            bgColor = UIColor.blue
+            bgColor = UIColor(red: 44/255, green: 152/255, blue: 239/255, alpha: 1.0)
+            
+            if stackView == rightView {
+                label.textColor = .clear // Hack to hide the right text
+            }
+            
         }
         if line.starts(with: "+") {
             bgColor = UIColor.green
@@ -173,6 +183,7 @@ extension FileTableViewCell {
         if line.starts(with: "-") {
             bgColor = UIColor.red
         }
+
         label.backgroundColor = bgColor.withAlphaComponent(0.2)
 
         if let lineNo = lineNo {

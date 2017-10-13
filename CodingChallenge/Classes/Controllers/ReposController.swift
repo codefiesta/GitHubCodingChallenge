@@ -48,7 +48,7 @@ class ReposController: UITableViewController {
         guard let user = user else {
             return
         }
-        
+        title = user.login
         tableView.refreshControl?.beginRefreshing()
         GitHubClient.repos(user) { (repos, error) in
             guard let repos = repos else {
@@ -96,6 +96,10 @@ class ReposController: UITableViewController {
         let repo = repos[indexPath.row]
         cell.nameLabel?.text = repo.name
         cell.descLabel?.text = repo.description
+        
+        if let language = repo.language {
+            cell.languageCodeView?.backgroundColor = ProgrammingLanguage(rawValue: language)?.color ?? UIColor.lightGray
+        }
         cell.languageLabel?.text = repo.language
         cell.starGazersLabel?.text = "⭐️ \(repo.starGazers)"
         cell.forksLabel?.text = "⑂ \(repo.forks)"

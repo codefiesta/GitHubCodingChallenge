@@ -104,7 +104,11 @@ class UsersController: UITableViewController {
         
         let user = results.users[indexPath.row]
         
-        cell.primaryImageView?.image(fromUrl: user.avatarUrl, nil)
+        cell.primaryImageView?.image(fromUrl: user.avatarUrl, { (image, error) in
+            DispatchQueue.main.async {
+                cell.primaryImageView?.image = image
+            }
+        })
         cell.titleLabel?.text = user.login
         cell.descLabel?.text = user.reposUrl
         return cell

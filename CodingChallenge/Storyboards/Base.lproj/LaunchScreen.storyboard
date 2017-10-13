@@ -17,19 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GitHub_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="86Z-lf-wIG">
-                                <rect key="frame" x="8" y="263.5" width="359" height="140"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="0Kg-Ql-IrZ"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PC_GH" translatesAutoresizingMaskIntoConstraints="NO" id="Rb9-hN-BTr">
+                                <rect key="frame" x="0.0" y="20" width="375" height="627"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="86Z-lf-wIG" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="06P-zM-Wj6"/>
-                            <constraint firstItem="86Z-lf-wIG" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="8" id="9QE-g6-pAB"/>
-                            <constraint firstItem="86Z-lf-wIG" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9yu-y4-Nbc"/>
-                            <constraint firstAttribute="trailing" secondItem="86Z-lf-wIG" secondAttribute="trailing" constant="8" id="vRL-vp-OCo"/>
+                            <constraint firstItem="Rb9-hN-BTr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JFU-7S-Tjp"/>
+                            <constraint firstItem="Rb9-hN-BTr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NDF-1X-5zt"/>
+                            <constraint firstItem="Rb9-hN-BTr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RiJ-GM-eka"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Rb9-hN-BTr" secondAttribute="bottom" constant="20" id="h02-Yt-DqA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -40,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="GitHub_Logo" width="1000" height="410"/>
+        <image name="PC_GH" width="1080" height="1080"/>
     </resources>
 </document>

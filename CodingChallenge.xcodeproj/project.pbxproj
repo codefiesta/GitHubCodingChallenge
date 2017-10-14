@@ -14,6 +14,7 @@
 		0A4D40271F8FE5DE00BC5EDF /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */; };
 		0A4D402B1F91335900BC5EDF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D402A1F91335900BC5EDF /* ImageCache.swift */; };
 		0A4D402D1F913ED900BC5EDF /* ProgrammingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D402C1F913ED900BC5EDF /* ProgrammingLanguage.swift */; };
+		0AB3F0141F91601700FA6A99 /* Patch0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0AB3F0131F91601700FA6A99 /* Patch0.txt */; };
 		0AB987AC1F8EE4B200910F04 /* ReposController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AB1F8EE4B200910F04 /* ReposController.swift */; };
 		0AB987AE1F8EE80000910F04 /* PullsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AD1F8EE80000910F04 /* PullsController.swift */; };
 		0AB987B01F8EEA8600910F04 /* DiffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AF1F8EEA8600910F04 /* DiffController.swift */; };
@@ -73,6 +74,7 @@
 		0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		0A4D402A1F91335900BC5EDF /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		0A4D402C1F913ED900BC5EDF /* ProgrammingLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammingLanguage.swift; sourceTree = "<group>"; };
+		0AB3F0131F91601700FA6A99 /* Patch0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Patch0.txt; sourceTree = "<group>"; };
 		0AB987AB1F8EE4B200910F04 /* ReposController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposController.swift; sourceTree = "<group>"; };
 		0AB987AD1F8EE80000910F04 /* PullsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullsController.swift; sourceTree = "<group>"; };
 		0AB987AF1F8EEA8600910F04 /* DiffController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A1815241F915EA5007B6674 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B58F1F8E8E60009D5B74 /* GitHubTests.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		0A1815251F915EB6007B6674 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B5911F8E8E60009D5B74 /* Info.plist */,
+				0AB3F0131F91601700FA6A99 /* Patch0.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		0A4D40291F91333300BC5EDF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,8 +217,8 @@
 		0AC9B58E1F8E8E60009D5B74 /* CodingChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
-				0AC9B58F1F8E8E60009D5B74 /* GitHubTests.swift */,
-				0AC9B5911F8E8E60009D5B74 /* Info.plist */,
+				0A1815241F915EA5007B6674 /* Classes */,
+				0A1815251F915EB6007B6674 /* Resources */,
 			);
 			path = CodingChallengeTests;
 			sourceTree = "<group>";
@@ -402,6 +421,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AB3F0141F91601700FA6A99 /* Patch0.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,9 +656,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				INFOPLIST_FILE = GitHubTests/Info.plist;
+				INFOPLIST_FILE = CodingChallengeTests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.procore.GitHubTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.procore.CodingChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -653,9 +673,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				INFOPLIST_FILE = GitHubTests/Info.plist;
+				INFOPLIST_FILE = CodingChallengeTests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.procore.GitHubTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.procore.CodingChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

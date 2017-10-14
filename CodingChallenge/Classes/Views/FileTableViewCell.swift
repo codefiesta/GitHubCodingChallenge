@@ -31,10 +31,7 @@ class FileTableViewCell: UITableViewCell {
     fileprivate func prepare() {
         selectionStyle = .none
         prepareActivityIndicatorView()
-        prepareContainerView()
-        prepareSingleView()
-        prepareLeftView()
-        prepareRightView()
+        prepareVerticalStacks()
         prepareSplitView()
     }
     
@@ -63,60 +60,44 @@ class FileTableViewCell: UITableViewCell {
         addSubview(activityIndicatorView)
     }
     
-    fileprivate func prepareLeftView() {
+    fileprivate func prepareVerticalStacks() {
+        containerView = UIStackView()
         leftView = UIStackView()
-        leftView.translatesAutoresizingMaskIntoConstraints = false
-        leftView.axis = .vertical
-        leftView.distribution = .fill
-        leftView.isLayoutMarginsRelativeArrangement = true
+        rightView = UIStackView()
+        singleView = UIStackView()
+        [containerView, leftView, rightView, singleView].forEach { (stackView) in
+            stackView?.translatesAutoresizingMaskIntoConstraints = false
+            stackView?.axis = .vertical
+            stackView?.distribution = .fill
+            stackView?.isLayoutMarginsRelativeArrangement = true
+            stackView?.isUserInteractionEnabled = false
+        }
+
+        addSubview(containerView)
+        containerView.fitToParent()
+        containerView.addArrangedSubview(singleView)
     }
     
-    fileprivate func prepareRightView() {
-        rightView = UIStackView()
-        rightView.translatesAutoresizingMaskIntoConstraints = false
-        rightView.axis = .vertical
-        rightView.distribution = .fill
-        rightView.isLayoutMarginsRelativeArrangement = true
-    }
-
     fileprivate func prepareSplitView() {
         splitView = UIStackView()
         splitView.translatesAutoresizingMaskIntoConstraints = false
         splitView.axis = .horizontal
         splitView.distribution = .fillEqually
         splitView.isLayoutMarginsRelativeArrangement = true
+        splitView.isUserInteractionEnabled = false
         containerView.addArrangedSubview(splitView)
         
         splitView.addArrangedSubview(leftView)
         splitView.addArrangedSubview(rightView)
     }
 
-    fileprivate func prepareSingleView() {
-        singleView = UIStackView()
-        singleView.translatesAutoresizingMaskIntoConstraints = false
-        singleView.axis = .vertical
-        singleView.distribution = .fill
-        singleView.isLayoutMarginsRelativeArrangement = true
-        containerView.addArrangedSubview(singleView)
-    }
-    
-    fileprivate func prepareContainerView() {
-        containerView = UIStackView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.axis = .vertical
-        containerView.distribution = .fill
-        containerView.isLayoutMarginsRelativeArrangement = true
-        addSubview(containerView)
-        containerView.fitToParent()
-    }
-
-    
     func prepare(_ file: GitHubPullRequestFile) {
         
         var file = file
         let lines = file.lines
+        
         guard lines.count < maxChanges else {
-            prepareLine("Large diffs are not rendered by default", stackView: singleView)
+            prepareLine("👹 Large diffs are not rendered by default", stackView: singleView)
             return
         }
         
@@ -149,7 +130,7 @@ class FileTableViewCell: UITableViewCell {
                 }
             }
         }
-        setNeedsDisplay()
+        print("🤓 File prepared")
     }
 }
 
@@ -166,13 +147,14 @@ extension FileTableViewCell {
         label.font = UIFont.systemFont(ofSize: 8)
         label.text = line
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = false
         
         var bgColor: UIColor = .white
         
         if line.starts(with: "@@ ") {
             bgColor = UIColor(red: 44/255, green: 152/255, blue: 239/255, alpha: 1.0)
             
-            if stackView == rightView {
+            if stackView == self.rightView {
                 label.textColor = .clear // Hack to hide the right text
             }
             
@@ -183,9 +165,9 @@ extension FileTableViewCell {
         if line.starts(with: "-") {
             bgColor = UIColor.red
         }
-
+        
         label.backgroundColor = bgColor.withAlphaComponent(0.2)
-
+        
         if let lineNo = lineNo {
             
             // Build a stackview with a gutter line number

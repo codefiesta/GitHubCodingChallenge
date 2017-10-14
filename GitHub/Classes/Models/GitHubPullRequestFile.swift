@@ -24,7 +24,7 @@ public struct GitHubPullRequestFile: Codable {
         guard let patch = patch else {
             return []
         }
-        return patch.components(separatedBy: .newlines)
+        return patch.components(separatedBy: "\n") // For some reason seeing empty lines on .newLines
     }()
 
     public lazy var length: Int = {

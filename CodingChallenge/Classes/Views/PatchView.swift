@@ -11,10 +11,9 @@ import CoreText
 
 class PatchView: UIView {
     
-//    fileprivate let firstLinePattern = "^(.+)\n"
-    fileprivate let headerPattern = "@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+)"
-    fileprivate let deletionLinePattern = "\n(\\-.*)"
-    fileprivate let additionLinePattern = "\n(\\+.*)"
+    fileprivate let headerPattern = "@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
+    fileprivate let deletionLinePattern = "\n\r?(\\-.*)"
+    fileprivate let additionLinePattern = "\n\r?(\\+.*)"
     
     let decorators: [String: UIColor] = [
         "+": UIColor.green.withAlphaComponent(0.25),
@@ -82,16 +81,12 @@ class PatchView: UIView {
             return
         }
         
-        print("Preparing text")
         var scrubbed = text
         let pattern = isAdditionPatch ? additionLinePattern : deletionLinePattern
         do {
+
             let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-            print("Regex Built ...")
-
             let range = NSRange(location: 0, length: text.characters.count)
-            print("Scrubbing ...")
-
             scrubbed = regex.stringByReplacingMatches(in: text, options: .reportCompletion, range: range, withTemplate: "")
         } catch {
             print("Error Matching: \(error)")
@@ -116,7 +111,6 @@ class PatchView: UIView {
 
         var lineNo = 0
         
-        print("Beginning line fragments ...")
         layoutManager.enumerateLineFragments(forGlyphRange: glyphsToShow) { (rect, usedRect, textContainer, glyphRange, stop) in
             
             let characterRange = layoutManager.characterRange(forGlyphRange: glyphRange, actualGlyphRange: nil)

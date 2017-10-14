@@ -11,6 +11,14 @@ import XCTest
 
 class GitHubTests: XCTestCase {
     
+    
+    fileprivate let headerPattern = "@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
+    fileprivate let deletionLinePattern = "\n(\\-.*?)"
+    //fileprivate let additionLinePattern = "[^\n\r]*"
+    //fileprivate let additionLinePattern = "[\n][\\+][^\n\r]*"
+    //fileprivate let additionLinePattern = "[\\+]"
+    fileprivate let additionLinePattern = "([^\n])([\\+])"
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,17 +29,32 @@ class GitHubTests: XCTestCase {
         super.tearDown()
     }
     
-    func testPatchFileLines() {
+    func testPatchRegex() {
         
         guard let patch = loadPatchFile("Patch0") else {
             XCTFail("Unable to load patch file")
             return
         }
         
-        let lines = patch.components(separatedBy: .newlines)
-        XCTAssertFalse(lines.isEmpty, "🤔 The file has no lines")
-        print("🐝 \(lines.count)")
-        print("🐸 \(patch)")
+        var scrubbed = replace(patch, headerPattern)
+        XCTAssertFalse(scrubbed.contains("@@"), "🤔 The file still has headers!")
+        print("😻 \(scrubbed)")
+        scrubbed = replace(patch, additionLinePattern)
+        print("🤢 \(scrubbed)")
+        
+    }
+    
+    func replace(_ text: String, _ pattern: String) -> String {
+        var scrubbed = text
+        do {
+            
+            let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+            let range = NSRange(location: 0, length: text.characters.count)
+            scrubbed = regex.stringByReplacingMatches(in: text, options: .reportCompletion, range: range, withTemplate: "🐣")
+        } catch {
+            print("Error Matching: \(error)")
+        }
+        return scrubbed
     }
     
     func testPerformanceExample() {

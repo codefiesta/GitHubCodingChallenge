@@ -47,7 +47,7 @@ class DiffController: UITableViewController {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicatorView)
         view.bringSubview(toFront: activityIndicatorView)
-        activityIndicatorView.centerInParent()
+        activityIndicatorView.center()
     }
 
     fileprivate func prepareTableView() {

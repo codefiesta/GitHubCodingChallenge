@@ -111,10 +111,6 @@ class DiffController: UITableViewController {
         return header
     }
     
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard !files.isEmpty else {
             return 0
@@ -124,6 +120,7 @@ class DiffController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
+        
         
 //        let cacheKey = NSNumber(value: indexPath.section)
 //        if let cell = cache.object(forKey: cacheKey) {
@@ -139,7 +136,8 @@ class DiffController: UITableViewController {
         // Use the indexPath.section instead of row since I am building section headers for each file
         let file = files[indexPath.section]
         cell.prepare(file)
-        //cache.setObject(cell, forKey: cacheKey)
+        cell.layoutIfNeeded()
+        // cache.setObject(cell, forKey: cacheKey)
 
         return cell
     }

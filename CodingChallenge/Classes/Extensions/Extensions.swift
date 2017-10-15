@@ -10,28 +10,46 @@ import UIKit
 
 extension UIView {
 
-    // Pins a views edges to it's parent view via layout constraints
-    func fitToParent() {
-        
-        guard let parent = superview else {
-            return
-        }
-        
-        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: parent, attribute: .top, multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: parent, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: parent, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: parent, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
-        
-    }
-    
     // Centers a view to it's parent view via layout constraints
-    func centerInParent() {
+    func center() {
         guard let parent = superview else {
             return
         }
         
         NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: parent, attribute: .centerX, multiplier: 1.0, constant: 0.0).isActive = true
         NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: parent, attribute: .centerY, multiplier: 1.0, constant: 0.0).isActive = true
+    }
+    
+    // Pins a views edges to it's parent view via layout constraints
+    func edges(_ top: CGFloat = 0, _ left: CGFloat = 0, _ bottom: CGFloat = 0, _ right: CGFloat = 0) {
+        guard let parent = superview else {
+            return
+        }
+        
+        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: parent, attribute: .top, multiplier: 1.0, constant: top).isActive = true
+        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: parent, attribute: .leading, multiplier: 1.0, constant: left).isActive = true
+        NSLayoutConstraint(item: parent, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: bottom).isActive = true
+        NSLayoutConstraint(item: parent, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: right).isActive = true
+    }
+}
+
+extension String {
+    
+    func substring(with nsrange: NSRange) -> Substring? {
+        guard let range = Range(nsrange, in: self) else { return nil }
+        return self[range]
+    }
+}
+
+extension Int {
+    
+    init?(_ substring: Substring?) {
+        guard let substring = substring else {
+            self.init(0)
+            return
+        }
+        let string = String(substring)
+        self.init(string)
     }
 }
 

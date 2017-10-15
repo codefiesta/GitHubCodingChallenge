@@ -12,14 +12,16 @@ class DiffController: UITableViewController {
     
     var activityIndicatorView: UIActivityIndicatorView!
     
+    let maxCellsLoading: Int = 3
     let cellIdentifier = "Cell"
     var pullRequest: GitHubPullRequest?
+    var queue = [IndexPath: Bool]()
     var files = [GitHubPullRequestFile]()
     let cache = NSCache<NSNumber, FileTableViewCell>()
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        print("Received memory warning")
+        print("🙀 Received memory warning")
     }
     
     override func viewDidLoad() {
@@ -27,6 +29,10 @@ class DiffController: UITableViewController {
         prepareNavigationItems()
         prepareActivityIndicatorView()
         prepareTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         prepareData()
     }
     
@@ -41,7 +47,7 @@ class DiffController: UITableViewController {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicatorView)
         view.bringSubview(toFront: activityIndicatorView)
-        activityIndicatorView.centerInParent()
+        activityIndicatorView.center()
     }
 
     fileprivate func prepareTableView() {
@@ -59,15 +65,26 @@ class DiffController: UITableViewController {
         }
         
         title = "#\(pullRequest.number)"
+        
         activityIndicatorView.startAnimating()
-        GitHubClient.files(pullRequest) { (files, error) in
-            guard let files = files else {
-                return
-            }
-            self.files = files
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.activityIndicatorView.stopAnimating()
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            GitHubClient.files(pullRequest) { (data, error) in
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        self.activityIndicatorView.stopAnimating()
+                        self.dataError()
+                    }
+                    return
+                }
+                self.queue.removeAll()
+                self.files = data
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.activityIndicatorView.stopAnimating()
+                }
             }
         }
     }
@@ -91,9 +108,15 @@ class DiffController: UITableViewController {
         }
         return 1
     }
+
+//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
         
+        print("🎉 Cell for row at \(indexPath)")
+
         let cacheKey = NSNumber(value: indexPath.section)
         if let cell = cache.object(forKey: cacheKey) {
             print("🐙 Found cached cell \(indexPath)")
@@ -109,28 +132,28 @@ class DiffController: UITableViewController {
         let file = files[indexPath.section]
         cell.prepare(file)
         cache.setObject(cell, forKey: cacheKey)
+        print("🎉 Finished cell")
+
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension DiffController: UITableViewDataSourcePrefetching {
     
-    fileprivate func loadCell(_ indexPath: IndexPath) {
+    fileprivate func createCell(_ indexPath: IndexPath) {
         let cacheKey = NSNumber(value: indexPath.section)
-        if cache.object(forKey: cacheKey) == nil, let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FileTableViewCell  {
+        
+        if cache.object(forKey: cacheKey) == nil, let _ = queue[indexPath] {
 
             let file = files[indexPath.section]
-            
-            DispatchQueue.global(qos: .background).async {
-                print("🙊 Prefetching \(file.name)")
-                DispatchQueue.main.async {
-                    cell.prepare(file)
-                    self.cache.setObject(cell, forKey: cacheKey)
+            print("🙊 Prefetching \(file.name)")
+            DispatchQueue.main.async {
+                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as? FileTableViewCell else {
+                    return
                 }
+                cell.prepare(file)
+                self.cache.setObject(cell, forKey: cacheKey)
+                self.queue.removeValue(forKey: indexPath)
             }
         } else {
             print("🦄 Already cached")
@@ -144,14 +167,39 @@ extension DiffController: UITableViewDataSourcePrefetching {
         }
         
         indexPaths.forEach { (indexPath) in
-            loadCell(indexPath)
+            DispatchQueue.global(qos: .background).async {
+                self.queue[indexPath] = true
+                self.createCell(indexPath)
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         
         indexPaths.forEach { (indexPath) in
-            print("🙊 Cancelling prefetch \(indexPath)") // No network calls so let it run
+            DispatchQueue.global(qos: .background).async {
+                print("🙊 Cancelling prefetch \(indexPath)")
+                self.queue.removeValue(forKey: indexPath)
+            }
         }
+    }
+}
+
+extension DiffController {
+    
+    fileprivate func dataError() {
+        let title = "API Error"
+        let message = "Oops. The request may have timed out. Try again?"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: {
+            (alert: UIAlertAction) -> Void in
+            self.prepareData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction) -> Void in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

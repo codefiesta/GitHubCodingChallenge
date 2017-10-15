@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		0A02D11B1F8ED850003D5BFC /* GitHubPullRequestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02D11A1F8ED850003D5BFC /* GitHubPullRequestFile.swift */; };
 		0A2DF59A1F8ED1E3008B9F63 /* GitHubRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2DF5991F8ED1E3008B9F63 /* GitHubRepo.swift */; };
-		0A4A7D271F8F221500E1E09B /* PatchLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A4A7D251F8F221500E1E09B /* PatchLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0A4A7D2A1F8F221500E1E09B /* PatchLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4A7D231F8F221500E1E09B /* PatchLabel.framework */; };
-		0A4A7D2B1F8F221500E1E09B /* PatchLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4A7D231F8F221500E1E09B /* PatchLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0A4A7D311F8F223D00E1E09B /* PatchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A7D301F8F223D00E1E09B /* PatchLabel.swift */; };
 		0A4D40251F8FE08C00BC5EDF /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D40241F8FE08C00BC5EDF /* BasicTableViewCell.swift */; };
 		0A4D40271F8FE5DE00BC5EDF /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */; };
 		0A4D402B1F91335900BC5EDF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D402A1F91335900BC5EDF /* ImageCache.swift */; };
 		0A4D402D1F913ED900BC5EDF /* ProgrammingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D402C1F913ED900BC5EDF /* ProgrammingLanguage.swift */; };
+		0A7138281F91D95500DEBE0F /* PatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7138271F91D95500DEBE0F /* PatchView.swift */; };
+		0A71382E1F92AC5700DEBE0F /* Patch1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A71382D1F92AC5700DEBE0F /* Patch1.txt */; };
+		0AB3F0141F91601700FA6A99 /* Patch0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0AB3F0131F91601700FA6A99 /* Patch0.txt */; };
 		0AB987AC1F8EE4B200910F04 /* ReposController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AB1F8EE4B200910F04 /* ReposController.swift */; };
 		0AB987AE1F8EE80000910F04 /* PullsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AD1F8EE80000910F04 /* PullsController.swift */; };
 		0AB987B01F8EEA8600910F04 /* DiffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987AF1F8EEA8600910F04 /* DiffController.swift */; };
@@ -38,13 +37,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0A4A7D281F8F221500E1E09B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0AC9B56F1F8E8E60009D5B74 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0A4A7D221F8F221500E1E09B;
-			remoteInfo = PatchLabel;
-		};
 		0AC9B58C1F8E8E60009D5B74 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0AC9B56F1F8E8E60009D5B74 /* Project object */;
@@ -68,7 +60,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0A4A7D2B1F8F221500E1E09B /* PatchLabel.framework in Embed Frameworks */,
 				0AC9F0B11F8ECECE00287506 /* GitHub.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -79,14 +70,13 @@
 /* Begin PBXFileReference section */
 		0A02D11A1F8ED850003D5BFC /* GitHubPullRequestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPullRequestFile.swift; sourceTree = "<group>"; };
 		0A2DF5991F8ED1E3008B9F63 /* GitHubRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepo.swift; sourceTree = "<group>"; };
-		0A4A7D231F8F221500E1E09B /* PatchLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PatchLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A4A7D251F8F221500E1E09B /* PatchLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatchLabel.h; sourceTree = "<group>"; };
-		0A4A7D261F8F221500E1E09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A4A7D301F8F223D00E1E09B /* PatchLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchLabel.swift; sourceTree = "<group>"; };
 		0A4D40241F8FE08C00BC5EDF /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 		0A4D402A1F91335900BC5EDF /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		0A4D402C1F913ED900BC5EDF /* ProgrammingLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammingLanguage.swift; sourceTree = "<group>"; };
+		0A7138271F91D95500DEBE0F /* PatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchView.swift; sourceTree = "<group>"; };
+		0A71382D1F92AC5700DEBE0F /* Patch1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Patch1.txt; sourceTree = "<group>"; };
+		0AB3F0131F91601700FA6A99 /* Patch0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Patch0.txt; sourceTree = "<group>"; };
 		0AB987AB1F8EE4B200910F04 /* ReposController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposController.swift; sourceTree = "<group>"; };
 		0AB987AD1F8EE80000910F04 /* PullsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullsController.swift; sourceTree = "<group>"; };
 		0AB987AF1F8EEA8600910F04 /* DiffController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffController.swift; sourceTree = "<group>"; };
@@ -113,18 +103,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0A4A7D1F1F8F221500E1E09B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0AC9B5741F8E8E60009D5B74 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A4A7D2A1F8F221500E1E09B /* PatchLabel.framework in Frameworks */,
 				0AC9F0B01F8ECECE00287506 /* GitHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,22 +128,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A4A7D241F8F221500E1E09B /* PatchLabel */ = {
+		0A1815241F915EA5007B6674 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				0A4A7D2F1F8F222000E1E09B /* Classes */,
-				0A4A7D251F8F221500E1E09B /* PatchLabel.h */,
-				0A4A7D261F8F221500E1E09B /* Info.plist */,
-			);
-			path = PatchLabel;
-			sourceTree = "<group>";
-		};
-		0A4A7D2F1F8F222000E1E09B /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				0A4A7D301F8F223D00E1E09B /* PatchLabel.swift */,
+				0AC9B58F1F8E8E60009D5B74 /* GitHubTests.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		0A1815251F915EB6007B6674 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0AC9B5911F8E8E60009D5B74 /* Info.plist */,
+				0AB3F0131F91601700FA6A99 /* Patch0.txt */,
+				0A71382D1F92AC5700DEBE0F /* Patch1.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		0A4D40291F91333300BC5EDF /* Helpers */ = {
@@ -179,6 +161,7 @@
 				0A4D40241F8FE08C00BC5EDF /* BasicTableViewCell.swift */,
 				0AB987B21F8EEF2E00910F04 /* FileTableViewCell.swift */,
 				0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */,
+				0A7138271F91D95500DEBE0F /* PatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,10 +190,9 @@
 			isa = PBXGroup;
 			children = (
 				0AC9B5791F8E8E60009D5B74 /* CodingChallenge */,
-				0AC9F0AA1F8ECECE00287506 /* GitHub */,
-				0A4A7D241F8F221500E1E09B /* PatchLabel */,
 				0AC9B58E1F8E8E60009D5B74 /* CodingChallengeTests */,
 				0AC9B59E1F8E8FD5009D5B74 /* CodingChallengePlaygrounds */,
+				0AC9F0AA1F8ECECE00287506 /* GitHub */,
 				0AC9B5781F8E8E60009D5B74 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -221,7 +203,6 @@
 				0AC9B5771F8E8E60009D5B74 /* CodingChallenge.app */,
 				0AC9B58B1F8E8E60009D5B74 /* CodingChallengeTests.xctest */,
 				0AC9F0A91F8ECECE00287506 /* GitHub.framework */,
-				0A4A7D231F8F221500E1E09B /* PatchLabel.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,8 +220,8 @@
 		0AC9B58E1F8E8E60009D5B74 /* CodingChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
-				0AC9B58F1F8E8E60009D5B74 /* GitHubTests.swift */,
-				0AC9B5911F8E8E60009D5B74 /* Info.plist */,
+				0A1815241F915EA5007B6674 /* Classes */,
+				0A1815251F915EB6007B6674 /* Resources */,
 			);
 			path = CodingChallengeTests;
 			sourceTree = "<group>";
@@ -316,14 +297,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0A4A7D201F8F221500E1E09B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0A4A7D271F8F221500E1E09B /* PatchLabel.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0AC9F0A61F8ECECE00287506 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -335,24 +308,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0A4A7D221F8F221500E1E09B /* PatchLabel */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0A4A7D2E1F8F221500E1E09B /* Build configuration list for PBXNativeTarget "PatchLabel" */;
-			buildPhases = (
-				0A4A7D1E1F8F221500E1E09B /* Sources */,
-				0A4A7D1F1F8F221500E1E09B /* Frameworks */,
-				0A4A7D201F8F221500E1E09B /* Headers */,
-				0A4A7D211F8F221500E1E09B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PatchLabel;
-			productName = PatchLabel;
-			productReference = 0A4A7D231F8F221500E1E09B /* PatchLabel.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		0AC9B5761F8E8E60009D5B74 /* CodingChallenge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0AC9B5941F8E8E60009D5B74 /* Build configuration list for PBXNativeTarget "CodingChallenge" */;
@@ -366,7 +321,6 @@
 			);
 			dependencies = (
 				0AC9F0AF1F8ECECE00287506 /* PBXTargetDependency */,
-				0A4A7D291F8F221500E1E09B /* PBXTargetDependency */,
 			);
 			name = CodingChallenge;
 			productName = GitHub;
@@ -419,11 +373,6 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Procore;
 				TargetAttributes = {
-					0A4A7D221F8F221500E1E09B = {
-						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-					};
 					0AC9B5761F8E8E60009D5B74 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -456,19 +405,11 @@
 				0AC9B5761F8E8E60009D5B74 /* CodingChallenge */,
 				0AC9B58A1F8E8E60009D5B74 /* CodingChallengeTests */,
 				0AC9F0A81F8ECECE00287506 /* GitHub */,
-				0A4A7D221F8F221500E1E09B /* PatchLabel */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0A4A7D211F8F221500E1E09B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0AC9B5751F8E8E60009D5B74 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,6 +424,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AB3F0141F91601700FA6A99 /* Patch0.txt in Resources */,
+				0A71382E1F92AC5700DEBE0F /* Patch1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,14 +439,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0A4A7D1E1F8F221500E1E09B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0A4A7D311F8F223D00E1E09B /* PatchLabel.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0AC9B5731F8E8E60009D5B74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -519,6 +454,7 @@
 				0AB987B01F8EEA8600910F04 /* DiffController.swift in Sources */,
 				0AB987B61F8EF2C700910F04 /* Extensions.swift in Sources */,
 				0A4D402D1F913ED900BC5EDF /* ProgrammingLanguage.swift in Sources */,
+				0A7138281F91D95500DEBE0F /* PatchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,11 +482,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0A4A7D291F8F221500E1E09B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0A4A7D221F8F221500E1E09B /* PatchLabel */;
-			targetProxy = 0A4A7D281F8F221500E1E09B /* PBXContainerItemProxy */;
-		};
 		0AC9B58D1F8E8E60009D5B74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0AC9B5761F8E8E60009D5B74 /* CodingChallenge */;
@@ -583,57 +514,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0A4A7D2C1F8F221500E1E09B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PatchLabel/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.procore.PatchLabel;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		0A4A7D2D1F8F221500E1E09B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PatchLabel/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.procore.PatchLabel;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		0AC9B5921F8E8E60009D5B74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -780,9 +660,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				INFOPLIST_FILE = GitHubTests/Info.plist;
+				INFOPLIST_FILE = CodingChallengeTests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.procore.GitHubTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.procore.CodingChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -797,9 +677,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4JQ9656ZY;
-				INFOPLIST_FILE = GitHubTests/Info.plist;
+				INFOPLIST_FILE = CodingChallengeTests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.procore.GitHubTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.procore.CodingChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -861,15 +741,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A4A7D2E1F8F221500E1E09B /* Build configuration list for PBXNativeTarget "PatchLabel" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0A4A7D2C1F8F221500E1E09B /* Debug */,
-				0A4A7D2D1F8F221500E1E09B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0AC9B5721F8E8E60009D5B74 /* Build configuration list for PBXProject "CodingChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -72,8 +72,7 @@ class FileTableViewCell: UITableViewCell {
             stackView?.isLayoutMarginsRelativeArrangement = true
             stackView?.isUserInteractionEnabled = false
         }
-
-        addSubview(containerView)
+        contentView.addSubview(containerView)
         containerView.edges()
         containerView.addArrangedSubview(singleView)
     }
@@ -97,8 +96,10 @@ class FileTableViewCell: UITableViewCell {
             
             let patchView = PatchView()
             patchView.text = file.patch
+            patchView.additions = file.additions
+            patchView.deletions = file.deletions
             
-            let stackView = file.additions != 0 ? rightView : singleView
+            let stackView = file.additions > 0 ? leftView : singleView
             stackView?.addSubview(patchView)
             patchView.edges()
         }
@@ -107,13 +108,18 @@ class FileTableViewCell: UITableViewCell {
             
             let patchView = PatchView()
             patchView.isAdditionPatch = true
+            patchView.additions = file.additions
+            patchView.deletions = file.deletions
             patchView.text = file.patch
             
-            let stackView = file.deletions != 0 ? leftView: singleView
+            let stackView = file.deletions > 0 ? rightView: singleView
 
             stackView?.addSubview(patchView)
             patchView.edges()
         }
-        print("🤓 File prepared")
+        
+        setNeedsLayout()
+        
+        print("🤓 \(file.name) prepared")
     }
 }

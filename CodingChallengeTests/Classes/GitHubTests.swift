@@ -11,8 +11,7 @@ import XCTest
 
 class GitHubTests: XCTestCase {
     
-    
-    fileprivate let headerPattern = "@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
+    fileprivate let headerPattern = "^@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
     fileprivate let deletionLinePattern = "\n(\\-.*?)"
     //fileprivate let additionLinePattern = "[^\n\r]*"
     //fileprivate let additionLinePattern = "[\n][\\+][^\n\r]*"
@@ -36,6 +35,9 @@ class GitHubTests: XCTestCase {
             return
         }
         
+        let headers = parseHeader(patch)
+        print("HEADERS: \(headers.leftStart), \(headers.rightStart)")
+        
         var scrubbed = replace(patch, headerPattern)
         XCTAssertFalse(scrubbed.contains("@@"), "🤔 The file still has headers!")
         print("😻 \(scrubbed)")
@@ -44,7 +46,28 @@ class GitHubTests: XCTestCase {
         
     }
     
-    func replace(_ text: String, _ pattern: String) -> String {
+    fileprivate func parseHeader(_ paragraph: String) -> (leftStart: Int, rightStart: Int) {
+        do {
+            print("🤓 Parsing header [\(paragraph)]")
+            let regex = try NSRegularExpression(pattern: headerPattern, options: .caseInsensitive)
+            let matches = regex.matches(in: paragraph, options: .reportProgress, range: NSMakeRange(0, paragraph.characters.count))
+            if !matches.isEmpty {
+                
+                print("🤓 Found header match!")
+                let match = matches[0]
+                
+                let left = Int(paragraph.substring(with: match.range(at: 1))) ?? 0
+                let right = Int(paragraph.substring(with: match.range(at: 3))) ?? 0
+                return (left, right)
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        return (0, 0)
+    }
+
+    
+    fileprivate func replace(_ text: String, _ pattern: String) -> String {
         var scrubbed = text
         do {
             

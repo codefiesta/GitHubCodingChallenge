@@ -9,8 +9,11 @@ Coding Challenge to View PR diffs in iOS
 
 ## Requirements:
 Xcode 9.0 or greater
+Cocoapods 1.3.1 or greater
 
 ## Notes:
+ Now open the project with the  CodingChallenge.xcworkspace file instead of the CodingChallenge.xcodeproj file!
+
 If you see 'ibtool failed with exit code 255' errors, you'll need to clean the project and force clean the build folder to fix this issue by running the following in Xcode:
 1. cmd + shift + k
 2. cmd + option + shift + k

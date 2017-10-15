@@ -12,11 +12,6 @@ import CoreText
 class PatchView: UIView {
     
     fileprivate let headerPattern = "^@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
-    fileprivate let deletionLinePattern = "\n?(\\-.*)"
-    fileprivate let additionLinePattern = "\n?(\\+.*)"
-
-//    fileprivate let deletionLinePattern = "\\n\-.+?\\n"
-//    fileprivate let additionLinePattern = "\\n\+.+?\\n"
 
     let decorators: [String: UIColor] = [
         "+": UIColor.green.withAlphaComponent(0.25),
@@ -99,7 +94,7 @@ class PatchView: UIView {
         // TODO: Use a regex to filter these lines 🤔
         var scrubbed = text
         let lines = text.components(separatedBy: .newlines).filter({ (line) -> Bool in
-            let startChar = isAdditionPatch ? "+" : "-"
+            let startChar = isAdditionPatch ? "-" : "+"
             return !line.starts(with: startChar)
         })
         scrubbed = lines.joined(separator: "\n")

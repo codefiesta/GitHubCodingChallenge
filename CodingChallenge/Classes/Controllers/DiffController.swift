@@ -14,6 +14,7 @@ class DiffController: UITableViewController {
     
     let maxCellsLoading: Int = 3
     let cellIdentifier = "Cell"
+    let headerIdentifier = "Header"
     var pullRequest: GitHubPullRequest?
     var queue = [IndexPath: Bool]()
     var files = [GitHubPullRequestFile]()
@@ -51,11 +52,13 @@ class DiffController: UITableViewController {
     }
 
     fileprivate func prepareTableView() {
-//        tableView.prefetchDataSource = self
+        //tableView.prefetchDataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.sectionHeaderHeight = 44
         tableView.estimatedRowHeight = 100
         tableView.tableFooterView = UIView()
         tableView.register(FileTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(FileTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: headerIdentifier)
     }
     
     fileprivate func prepareData() {
@@ -96,12 +99,22 @@ class DiffController: UITableViewController {
         }
         return files.count
     }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerIdentifier) as? FileTableViewHeaderView else {
+            return nil
+        }
+
         let file = files[section]
-        return "\(file.name) +\(file.additions) -\(file.deletions)"
+        header.titleLabel.text = "\(file.name)"
+        header.descLabel.text = "\(file.additions) additions & \(file.deletions) deletions"
+        return header
     }
     
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard !files.isEmpty else {
             return 0
@@ -109,14 +122,9 @@ class DiffController: UITableViewController {
         return 1
     }
 
-//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
         
-        print("🎉 Cell for row at \(indexPath)")
-
 //        let cacheKey = NSNumber(value: indexPath.section)
 //        if let cell = cache.object(forKey: cacheKey) {
 //            print("🐙 Found cached cell \(indexPath)")
@@ -131,8 +139,7 @@ class DiffController: UITableViewController {
         // Use the indexPath.section instead of row since I am building section headers for each file
         let file = files[indexPath.section]
         cell.prepare(file)
-//        cache.setObject(cell, forKey: cacheKey)
-        print("🎉 Finished cell")
+        //cache.setObject(cell, forKey: cacheKey)
 
         return cell
     }

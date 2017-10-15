@@ -100,7 +100,7 @@ class FileTableViewCell: UITableViewCell {
             patchView.additions = file.additions
             patchView.deletions = file.deletions
             
-            let stackView = file.additions != 0 ? rightView : singleView
+            let stackView = file.additions > 0 ? leftView : singleView
             stackView?.addSubview(patchView)
             patchView.edges()
         }
@@ -113,11 +113,11 @@ class FileTableViewCell: UITableViewCell {
             patchView.deletions = file.deletions
             patchView.text = file.patch
             
-            let stackView = file.deletions != 0 ? leftView: singleView
+            let stackView = file.deletions > 0 ? rightView: singleView
 
             stackView?.addSubview(patchView)
             patchView.edges()
         }
-        print("🤓 File prepared")
+        print("🤓 \(file.name) prepared")
     }
 }

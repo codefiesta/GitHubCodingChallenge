@@ -189,10 +189,10 @@
 		0AC9B56E1F8E8E60009D5B74 = {
 			isa = PBXGroup;
 			children = (
-				0AC9F0AA1F8ECECE00287506 /* GitHub */,
 				0AC9B5791F8E8E60009D5B74 /* CodingChallenge */,
 				0AC9B58E1F8E8E60009D5B74 /* CodingChallengeTests */,
 				0AC9B59E1F8E8FD5009D5B74 /* CodingChallengePlaygrounds */,
+				0AC9F0AA1F8ECECE00287506 /* GitHub */,
 				0AC9B5781F8E8E60009D5B74 /* Products */,
 			);
 			sourceTree = "<group>";

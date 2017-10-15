@@ -12,9 +12,9 @@ import CoreText
 class PatchView: UIView {
     
     fileprivate let headerPattern = "@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
-    fileprivate let deletionLinePattern = "\n\r?(\\-.*)"
-    fileprivate let additionLinePattern = "\n\r?(\\+.*)"
-    
+    fileprivate let deletionLinePattern = "\n?(\\-.*)"
+    fileprivate let additionLinePattern = "\n?(\\+.*)"
+
     let decorators: [String: UIColor] = [
         "+": UIColor.green.withAlphaComponent(0.25),
         "-": UIColor.red.withAlphaComponent(0.25),
@@ -97,10 +97,12 @@ class PatchView: UIView {
 
     override func draw(_ rect: CGRect) {
 
-        let context = UIGraphicsGetCurrentContext()!
+        guard let context = UIGraphicsGetCurrentContext() else {
+            super.draw(rect)
+            return
+        }
         UIGraphicsPushContext(context)
 
-        // DRAW THE LINE NUMBERS IN THE GUTTER
         let inset: CGFloat = 8 // Default TextView Inset
         let layoutManager = textView.layoutManager
         let textStorage = textView.textStorage
@@ -130,10 +132,9 @@ class PatchView: UIView {
                     gutterString.draw(at: point, withAttributes: gutterAttributes)
                     lineNo += 1
                 } else {
-                    // Reset our line numbers
-                    lineNo = self.parseLine(paragraph)
+                    // Reset our line numbers from the header
+                    lineNo = self.parseHeader(paragraph)
                 }
-                
             }
         }
         textView.draw(rect)
@@ -141,6 +142,7 @@ class PatchView: UIView {
     }
 
 
+    // Decorates paragraphs based on the starting characters (@@, +, -)
     fileprivate func decorate(_ paragraph: String, _ range: NSRange) {
         
         for (key, value) in decorators {
@@ -149,9 +151,9 @@ class PatchView: UIView {
             }
         }
     }
-    
-    fileprivate func parseLine(_ paragraph: String) -> Int {
-        
+
+    // Parses a header paragraph and returns the starting line number to use
+    fileprivate func parseHeader(_ paragraph: String) -> Int {
         do {
             let regex = try NSRegularExpression(pattern: headerPattern, options: .caseInsensitive)
             let matches = regex.matches(in: paragraph, options: .reportCompletion, range: NSMakeRange(0, paragraph.characters.count))

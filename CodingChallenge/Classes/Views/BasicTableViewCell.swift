@@ -33,7 +33,7 @@ class BasicTableViewCell: UITableViewCell {
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         primaryImageView?.addSubview(activityIndicatorView)
-        activityIndicatorView?.centerInParent()
+        activityIndicatorView?.center()
     }
     
     override func prepareForReuse() {

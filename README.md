@@ -3,6 +3,10 @@
 # GitHubCodingChallenge 
 Coding Challenge to View PR diffs in iOS
 
+![Xcode 9.0+](https://img.shields.io/badge/Xcode-9.0%2B-blue.svg)
+![iOS 11.0+](https://img.shields.io/badge/iOS-11.0%2B-green.svg)
+![Swift 4.0+](https://img.shields.io/badge/Swift-4.0%2B-orange.svg)
+
 ## Requirements:
 Xcode 9.0 or greater
 

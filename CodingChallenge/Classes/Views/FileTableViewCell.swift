@@ -97,6 +97,8 @@ class FileTableViewCell: UITableViewCell {
             
             let patchView = PatchView()
             patchView.text = file.patch
+            patchView.additions = file.additions
+            patchView.deletions = file.deletions
             
             let stackView = file.additions != 0 ? rightView : singleView
             stackView?.addSubview(patchView)
@@ -107,6 +109,8 @@ class FileTableViewCell: UITableViewCell {
             
             let patchView = PatchView()
             patchView.isAdditionPatch = true
+            patchView.additions = file.additions
+            patchView.deletions = file.deletions
             patchView.text = file.patch
             
             let stackView = file.deletions != 0 ? leftView: singleView

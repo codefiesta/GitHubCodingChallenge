@@ -51,7 +51,7 @@ class DiffController: UITableViewController {
     }
 
     fileprivate func prepareTableView() {
-        tableView.prefetchDataSource = self
+//        tableView.prefetchDataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         tableView.tableFooterView = UIView()
@@ -117,11 +117,11 @@ class DiffController: UITableViewController {
         
         print("🎉 Cell for row at \(indexPath)")
 
-        let cacheKey = NSNumber(value: indexPath.section)
-        if let cell = cache.object(forKey: cacheKey) {
-            print("🐙 Found cached cell \(indexPath)")
-            return cell
-        }
+//        let cacheKey = NSNumber(value: indexPath.section)
+//        if let cell = cache.object(forKey: cacheKey) {
+//            print("🐙 Found cached cell \(indexPath)")
+//            return cell
+//        }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FileTableViewCell,
             !files.isEmpty else {
@@ -131,7 +131,7 @@ class DiffController: UITableViewController {
         // Use the indexPath.section instead of row since I am building section headers for each file
         let file = files[indexPath.section]
         cell.prepare(file)
-        cache.setObject(cell, forKey: cacheKey)
+//        cache.setObject(cell, forKey: cacheKey)
         print("🎉 Finished cell")
 
         return cell

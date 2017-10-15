@@ -33,6 +33,8 @@
 		0AC9F0B11F8ECECE00287506 /* GitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC9F0A91F8ECECE00287506 /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0AC9F0B91F8ECF1D00287506 /* GitHubSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9F0B81F8ECF1D00287506 /* GitHubSearchResults.swift */; };
 		0AC9F0BB1F8ECF3700287506 /* GitHubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC9F0BA1F8ECF3700287506 /* GitHubUser.swift */; };
+		0AD05A5B1F93F02B00CA2470 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB987B51F8EF2C700910F04 /* Extensions.swift */; };
+		0AD05A5C1F93F0AA00CA2470 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D402A1F91335900BC5EDF /* ImageCache.swift */; };
 		0AD6006C1F8ED23100A0B529 /* GitHubPullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6006B1F8ED23100A0B529 /* GitHubPullRequest.swift */; };
 /* End PBXBuildFile section */
 
@@ -462,7 +464,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD05A5C1F93F0AA00CA2470 /* ImageCache.swift in Sources */,
 				0AC9B5901F8E8E60009D5B74 /* GitHubTests.swift in Sources */,
+				0AD05A5B1F93F02B00CA2470 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

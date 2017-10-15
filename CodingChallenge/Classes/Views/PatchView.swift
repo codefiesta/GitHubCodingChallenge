@@ -11,9 +11,12 @@ import CoreText
 
 class PatchView: UIView {
     
-    fileprivate let headerPattern = "@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
+    fileprivate let headerPattern = "^@@ \\-([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@"
     fileprivate let deletionLinePattern = "\n?(\\-.*)"
     fileprivate let additionLinePattern = "\n?(\\+.*)"
+
+//    fileprivate let deletionLinePattern = "\\n\-.+?\\n"
+//    fileprivate let additionLinePattern = "\\n\+.+?\\n"
 
     let decorators: [String: UIColor] = [
         "+": UIColor.green.withAlphaComponent(0.25),
@@ -22,7 +25,9 @@ class PatchView: UIView {
     ]
     
     var isAdditionPatch: Bool = false
-    
+    var additions: Int = 0
+    var deletions: Int = 0
+
     var gutterWidth: CGFloat = 24
     var attributes: [NSAttributedStringKey: Any] = [:]
     var text: String? {
@@ -81,17 +86,24 @@ class PatchView: UIView {
             return
         }
         
-        var scrubbed = text
-        let pattern = isAdditionPatch ? additionLinePattern : deletionLinePattern
-        do {
-
-            let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-            let range = NSRange(location: 0, length: text.characters.count)
-            scrubbed = regex.stringByReplacingMatches(in: text, options: .reportCompletion, range: range, withTemplate: "")
-        } catch {
-            print("Error Matching: \(error)")
+        if deletions > 0, additions == 0 { // Nothing to remove
+            textView.attributedText = NSMutableAttributedString(string: text, attributes: attributes)
+            return
         }
-        
+
+        if additions > 0, deletions == 0 {  // Nothing to remove
+            textView.attributedText = NSMutableAttributedString(string: text, attributes: attributes)
+            return
+        }
+
+        // TODO: Use a regex to filter these lines 🤔
+        var scrubbed = text
+        let lines = text.components(separatedBy: .newlines).filter({ (line) -> Bool in
+            let startChar = isAdditionPatch ? "+" : "-"
+            return !line.starts(with: startChar)
+        })
+        scrubbed = lines.joined(separator: "\n")
+
         textView.attributedText = NSMutableAttributedString(string: scrubbed, attributes: attributes)
     }
 
@@ -119,11 +131,11 @@ class PatchView: UIView {
             
             let textString = NSString(string: textStorage.string)
             let paragraphRange = textString.paragraphRange(for: characterRange)
-            
-            if characterRange.location == paragraphRange.location {
+
+            if characterRange.location == paragraphRange.location { // We've hit a new paragraph
                 
                 let paragraph = textString.substring(with: paragraphRange)
-
+                
                 self.decorate(paragraph, paragraphRange)
                 
                 if !paragraph.starts(with: "@@") { // Don't add a line number to header lines
@@ -132,7 +144,7 @@ class PatchView: UIView {
                     gutterString.draw(at: point, withAttributes: gutterAttributes)
                     lineNo += 1
                 } else {
-                    // Reset our line numbers from the header
+                    // Reset our starting line numbers by parsing the header
                     lineNo = self.parseHeader(paragraph)
                 }
             }
@@ -140,7 +152,6 @@ class PatchView: UIView {
         textView.draw(rect)
         UIGraphicsPopContext()
     }
-
 
     // Decorates paragraphs based on the starting characters (@@, +, -)
     fileprivate func decorate(_ paragraph: String, _ range: NSRange) {
@@ -156,8 +167,9 @@ class PatchView: UIView {
     fileprivate func parseHeader(_ paragraph: String) -> Int {
         do {
             let regex = try NSRegularExpression(pattern: headerPattern, options: .caseInsensitive)
-            let matches = regex.matches(in: paragraph, options: .reportCompletion, range: NSMakeRange(0, paragraph.characters.count))
+            let matches = regex.matches(in: paragraph, options: .reportProgress, range: NSMakeRange(0, paragraph.characters.count))
             if !matches.isEmpty {
+                
                 let match = matches[0]
                 let index = isAdditionPatch ? 3 : 1
                 return Int(paragraph.substring(with: match.range(at: index))) ?? 0

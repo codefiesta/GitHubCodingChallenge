@@ -118,7 +118,6 @@ class DiffController: UITableViewController {
         return 1
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->  UITableViewCell {
         
         
@@ -136,7 +135,6 @@ class DiffController: UITableViewController {
         // Use the indexPath.section instead of row since I am building section headers for each file
         let file = files[indexPath.section]
         cell.prepare(file)
-        cell.layoutIfNeeded()
         // cache.setObject(cell, forKey: cacheKey)
 
         return cell

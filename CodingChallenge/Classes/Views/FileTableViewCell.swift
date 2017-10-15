@@ -72,8 +72,7 @@ class FileTableViewCell: UITableViewCell {
             stackView?.isLayoutMarginsRelativeArrangement = true
             stackView?.isUserInteractionEnabled = false
         }
-
-        addSubview(containerView)
+        contentView.addSubview(containerView)
         containerView.edges()
         containerView.addArrangedSubview(singleView)
     }
@@ -118,6 +117,9 @@ class FileTableViewCell: UITableViewCell {
             stackView?.addSubview(patchView)
             patchView.edges()
         }
+        
+        setNeedsLayout()
+        
         print("🤓 \(file.name) prepared")
     }
 }

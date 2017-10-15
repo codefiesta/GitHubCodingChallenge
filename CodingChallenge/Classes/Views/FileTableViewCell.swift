@@ -11,7 +11,7 @@ import GitHub
 
 class FileTableViewCell: UITableViewCell {
     
-    var maxChanges: Int = 300 // The max number of changes allowed when rendering the diff
+    var maxChanges: Int = 400 // The max number of changes allowed when rendering the diff
     var activityIndicatorView: UIActivityIndicatorView!
     var containerView: UIStackView! // The master vertical stackview
     var splitView: UIStackView! // The horizontal split stackview
@@ -92,15 +92,25 @@ class FileTableViewCell: UITableViewCell {
 
     func prepare(_ file: GitHubPullRequestFile) {
         
+        if file.changes > maxChanges {
+            
+            let patchView = PatchView()
+            patchView.additions = file.additions
+            patchView.deletions = file.deletions
+            patchView.text = "🙀 Large diffs are not rendered by default. 🙀"
+            singleView?.addArrangedSubview(patchView)
+            patchView.edges()
+            return
+        }
+        
         if file.deletions > 0 {
             
             let patchView = PatchView()
-            patchView.text = file.patch
             patchView.additions = file.additions
             patchView.deletions = file.deletions
-            
+            patchView.text = file.patch
             let stackView = file.additions > 0 ? leftView : singleView
-            stackView?.addSubview(patchView)
+            stackView?.addArrangedSubview(patchView)
             patchView.edges()
         }
         
@@ -111,10 +121,8 @@ class FileTableViewCell: UITableViewCell {
             patchView.additions = file.additions
             patchView.deletions = file.deletions
             patchView.text = file.patch
-            
             let stackView = file.deletions > 0 ? rightView: singleView
-
-            stackView?.addSubview(patchView)
+            stackView?.addArrangedSubview(patchView)
             patchView.edges()
         }
         

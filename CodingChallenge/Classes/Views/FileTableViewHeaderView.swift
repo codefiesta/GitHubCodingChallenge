@@ -24,7 +24,7 @@ class FileTableViewHeaderView: UITableViewHeaderFooterView {
     }
 
     fileprivate func prepare() {
-        backgroundColor = UIColor.groupTableViewBackground
+        backgroundView?.backgroundColor = UIColor.groupTableViewBackground
         prepareStackView()
         prepareTitleLabel()
         prepareDescLabel()

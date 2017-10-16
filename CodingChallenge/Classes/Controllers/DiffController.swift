@@ -106,8 +106,7 @@ class DiffController: UITableViewController {
         }
 
         let file = files[section]
-        header.titleLabel.text = "\(file.name)"
-        header.descLabel.text = "\(file.additions) additions & \(file.deletions) deletions"
+        header.prepare(file)
         return header
     }
     

@@ -165,8 +165,8 @@
 				0A4D40241F8FE08C00BC5EDF /* BasicTableViewCell.swift */,
 				0AB987B21F8EEF2E00910F04 /* FileTableViewCell.swift */,
 				0AD05A5D1F940A4D00CA2470 /* FileTableViewHeaderView.swift */,
-				0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */,
 				0A7138271F91D95500DEBE0F /* PatchView.swift */,
+				0A4D40261F8FE5DE00BC5EDF /* RepoTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

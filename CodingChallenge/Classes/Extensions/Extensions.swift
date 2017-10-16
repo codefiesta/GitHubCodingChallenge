@@ -31,6 +31,11 @@ extension UIView {
         NSLayoutConstraint(item: parent, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: bottom).isActive = true
         NSLayoutConstraint(item: parent, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: right).isActive = true
     }
+    
+    // Creates auto-layout width contraints
+    func width(_ size: CGFloat) {
+        NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: size).isActive = true
+    }
 }
 
 extension String {
